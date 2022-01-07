@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_round_home_24"
+        android:enabled="true"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/writeFragment"
+        android:icon="@drawable/ic_baseline_mode_edit_outline_24"
+        android:enabled="true"
+        android:title="Write"/>
+
+    <item
+        android:id="@+id/interestFragment"
+        android:icon="@drawable/ic_baseline_push_pin_24"
+        android:enabled="true"
+        android:title="Interest"/>
+
+    <item
+        android:id="@+id/mywikiFragment"
+        android:icon="@drawable/ic_baseline_note_24"
+        android:enabled="true"
+        android:title="My Wiki"/>
+
+</menu>
