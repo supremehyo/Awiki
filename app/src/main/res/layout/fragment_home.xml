@@ -9,11 +9,10 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textField"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="검색어를 입력해주세요."
-        app:endIconMode="clear_text"
+        android:padding="30dp"
         app:layout_constraintVertical_bias="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,10 +21,49 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/search_et"
-            android:layout_marginHorizontal="30dp"
+            android:hint="검색어를 입력해주세요."
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/image1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textField"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintWidth_percent="0.85"></ImageView>
+
+
+    <TextView
+        android:id="@+id/wiki_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="비챤"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/wiki_subcontent"
+        android:text="이세돌 기여웡\n비챤 기여웡 최고다"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wiki_title"
+        app:layout_constraintWidth_percent="0.85"></TextView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
