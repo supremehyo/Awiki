@@ -1,4 +1,4 @@
-package com.supremehyo.base
+package com.supremehyo.awiki.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

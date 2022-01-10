@@ -11,11 +11,13 @@ import com.supremehyo.awiki.View.fragment.EditFragment
 import com.supremehyo.awiki.View.fragment.HomeFragment
 import com.supremehyo.awiki.View.fragment.InterestFragment
 import com.supremehyo.awiki.View.fragment.MywikiFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
 //https://kangmin1012.tistory.com/33  코디네이트
 //이 링크는 상세 글보기에서 나와야함.
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +28,9 @@ class MainActivity : AppCompatActivity() {
         var editFragment = EditFragment()
         var mywikiFragment = MywikiFragment()
         var interestFragment = InterestFragment()
+
+        //초기에 home 으로 화면
+        replaceFragment(homeFragment)
 
         navigationView.setNavigationItemSelectedListener(object : NavigationView.OnNavigationItemSelectedListener{
             override fun onNavigationItemSelected(item: MenuItem): Boolean {

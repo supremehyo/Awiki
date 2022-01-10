@@ -1,4 +1,4 @@
-package com.supremehyo.base
+package com.supremehyo.awiki.base
 
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
