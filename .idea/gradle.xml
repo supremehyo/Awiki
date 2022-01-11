@@ -11,6 +11,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/aztec" />
+            <option value="$PROJECT_DIR$/glide-loader" />
+            <option value="$PROJECT_DIR$/picasso-loader" />
+            <option value="$PROJECT_DIR$/wordpress-comments" />
+            <option value="$PROJECT_DIR$/wordpress-shortcodes" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

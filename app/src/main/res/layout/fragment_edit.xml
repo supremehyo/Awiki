@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:aztec="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -11,7 +13,7 @@
         android:layout_marginBottom="48dp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorAquaHaze"
@@ -20,8 +22,8 @@
             <org.wordpress.aztec.AztecText
                 android:id="@+id/et_editor"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
+                android:layout_height="match_parent"
+                android:gravity="top|start"
                 android:hint="@string/hint_input_text"
                 android:minLines="5"
                 android:padding="16dp"
@@ -33,95 +35,93 @@
                 app:quoteWidth="@dimen/quote_width"
                 app:textColor="@android:color/black" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16sp"
-                android:layout_marginTop="16sp"
-                android:layout_marginEnd="16sp"
-                android:text="프리뷰"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
+            <org.wordpress.aztec.source.SourceViewEditText
                 android:id="@+id/tv_preview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16sp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16sp"
-                android:layout_marginBottom="16sp"
-                android:minLines="5" />
-
-            <TextView
-                android:id="@+id/tv_preview2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16sp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16sp"
-                android:layout_marginBottom="16sp"
-                android:minLines="5" />
-
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:gravity="top|start"
+                android:hint="소스"
+                android:inputType="textNoSuggestions|textMultiLine"
+                android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp"
+                android:scrollbars="vertical"
+                android:textSize="14sp"
+                android:visibility="gone"
+                android:imeOptions="flagNoExtractUi"
+                aztec:codeBackgroundColor="@android:color/transparent"
+                aztec:codeTextColor="@color/black"/>
+        </FrameLayout>
 
     </ScrollView>
 
-    <com.google.android.material.bottomappbar.BottomAppBar
+    <org.wordpress.aztec.toolbar.AztecToolbar
+        android:id="@+id/formatting_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="bottom"
-        app:backgroundTint="@color/colorAquaHaze"
-        app:contentInsetEnd="8dp"
-        app:contentInsetStart="8dp"
-        app:elevation="2dp">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <!--
+       <com.google.android.material.bottomappbar.BottomAppBar
+           android:layout_width="match_parent"
+           android:layout_height="48dp"
+           android:layout_gravity="bottom"
+           app:backgroundTint="@color/colorAquaHaze"
+           app:contentInsetEnd="8dp"
+           app:contentInsetStart="8dp"
+           app:elevation="2dp">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_bold"
-                style="@style/ActionButton"
-                app:icon="@drawable/ic_format_bold_black_24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_italic"
-                style="@style/ActionButton"
-                app:icon="@drawable/ic_format_italic_black_24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btn_bold"
-                app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_quote"
-                style="@style/ActionButton"
-                app:icon="@drawable/ic_format_quote_black_24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btn_italic"
-                app:layout_constraintTop_toTopOf="parent" />
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_ordered_list"
-                style="@style/ActionButton"
-                app:icon="@drawable/ic_format_list_numbered_black_24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btn_quote"
-                app:layout_constraintTop_toTopOf="parent" />
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/btn_bold"
+                   style="@style/ActionButton"
+                   app:icon="@drawable/ic_format_bold_black_24dp"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_unordered_list"
-                style="@style/ActionButton"
-                app:icon="@drawable/ic_format_list_bulleted_black_24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btn_ordered_list"
-                app:layout_constraintTop_toTopOf="parent" />
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/btn_italic"
+                   style="@style/ActionButton"
+                   app:icon="@drawable/ic_format_italic_black_24dp"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintStart_toEndOf="@id/btn_bold"
+                   app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/btn_quote"
+                   style="@style/ActionButton"
+                   app:icon="@drawable/ic_format_quote_black_24dp"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintStart_toEndOf="@id/btn_italic"
+                   app:layout_constraintTop_toTopOf="parent" />
 
-    </com.google.android.material.bottomappbar.BottomAppBar>
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/btn_ordered_list"
+                   style="@style/ActionButton"
+                   app:icon="@drawable/ic_format_list_numbered_black_24dp"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintStart_toEndOf="@id/btn_quote"
+                   app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/btn_unordered_list"
+                   style="@style/ActionButton"
+                   app:icon="@drawable/ic_format_list_bulleted_black_24dp"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintStart_toEndOf="@id/btn_ordered_list"
+                   app:layout_constraintTop_toTopOf="parent" />
+
+           </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.bottomappbar.BottomAppBar> -->
+
+</RelativeLayout>

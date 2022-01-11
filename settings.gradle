@@ -1,11 +1,26 @@
+
+gradle.ext.kotlinVersion = '1.4.20'
+gradle.ext.agpVersion = '4.2.2'
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
-        maven { url "https://jitpack.io" }
+        maven {
+            url "https://a8c-libs.s3.amazonaws.com/android"
+            content {
+                includeGroup "org.wordpress"
+                includeGroup "org.wordpress.aztec"
+            }
+        }
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
 rootProject.name = "AWiki"
 include ':app'
+include ':aztec'
+include ':glide-loader'
+include ':picasso-loader'
+include ':wordpress-comments'
+include ':wordpress-shortcodes'

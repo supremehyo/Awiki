@@ -41,8 +41,16 @@ android {
 }
 
 dependencies {
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':aztec')
+    implementation project(':glide-loader')
+    implementation project(':picasso-loader')
+    implementation project(':wordpress-comments')
+    implementation project(':wordpress-shortcodes')
+
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0@aar'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
     implementation 'com.czerwii:SlidingdrawerMenu:1.0.1'
@@ -52,6 +60,7 @@ dependencies {
 
     // Activity Ktx
     implementation "androidx.activity:activity-ktx:1.1.0"
+    implementation project(path: ':glide-loader')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
@@ -63,11 +72,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
 
-    // Text Editor Library
-    implementation 'com.github.wordpress-mobile.WordPress-Aztec-Android:aztec:v1.3.41'
 
-
-    //room
+//room
     implementation "androidx.room:room-runtime:2.2.5"
     implementation "androidx.room:room-ktx:2.2.5"
 

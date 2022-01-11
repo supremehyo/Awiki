@@ -2,4 +2,5 @@
 <resources>
     <dimen name="default_margin">16dp</dimen>
     <dimen name="quote_width">4dp</dimen>
+    <bool name="is_large_tablet_landscape">false</bool>
 </resources>
