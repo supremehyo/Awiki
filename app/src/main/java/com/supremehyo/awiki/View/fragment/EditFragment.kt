@@ -84,21 +84,16 @@ class EditFragment : Fragment() ,
 
     private var mIsKeyboardOpen = false
     private var mHideActionBarOnSoftKeyboardUp = false
-
     private lateinit var binding: FragmentEditBinding
     private var mediaMenu: PopupMenu? = null
     protected lateinit var aztec: Aztec
     private lateinit var mediaFile: String
     private lateinit var mediaPath: String
-
     lateinit var visualEditor : AztecText
     lateinit var sourceEditor : SourceViewEditText
     lateinit var  toolbar: AztecToolbar
-
     private lateinit var invalidateOptionsHandler: Handler
     private lateinit var invalidateOptionsRunnable: Runnable
-
-
     private val MEDIA_CAMERA_PHOTO_PERMISSION_REQUEST_CODE: Int = 1001
     private val MEDIA_CAMERA_VIDEO_PERMISSION_REQUEST_CODE: Int = 1002
     private val MEDIA_PHOTOS_PERMISSION_REQUEST_CODE: Int = 1003
@@ -117,7 +112,6 @@ class EditFragment : Fragment() ,
     }
 
     private val viewModel: EditFragmentViewModel by viewModels() // hilt 로 editfragment viewmodel 주입
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -138,7 +132,6 @@ class EditFragment : Fragment() ,
         visualEditor = view.findViewById<AztecText>(R.id.et_editor)
         sourceEditor = view.findViewById<SourceViewEditText>(R.id.tv_preview)
         toolbar = view.findViewById<AztecToolbar>(R.id.formatting_toolbar)
-
 
         val galleryButton = MediaToolbarGalleryButton(toolbar)
         galleryButton.setMediaToolbarButtonClickListener(object : IMediaToolbarButton.IMediaToolbarClickListener {
@@ -165,7 +158,6 @@ class EditFragment : Fragment() ,
                 }
             }
         })
-
 
         aztec = Aztec.with(visualEditor, sourceEditor , toolbar, this)
             .setImageGetter(GlideImageLoader(requireContext()))
@@ -199,23 +191,17 @@ class EditFragment : Fragment() ,
             aztec.addPlugin(CssUnderlinePlugin())
         }
 
-
         invalidateOptionsHandler = Handler()
-        invalidateOptionsRunnable = Runnable { invalidateOptionsRunnable }
+        invalidateOptionsRunnable = Runnable {invalidateOptionsRunnable}
         initView()
         return view
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
-
             var bitmap: Bitmap
-
             when (requestCode) {
                 REQUEST_MEDIA_CAMERA_PHOTO -> {
-                    // By default, BitmapFactory.decodeFile sets the bitmap's density to the device default so, we need
-                    //  to correctly set the input density to 160 ourselves.
                     val options = BitmapFactory.Options()
                     options.inDensity = DisplayMetrics.DENSITY_DEFAULT
                     bitmap = BitmapFactory.decodeFile(mediaPath, options)
@@ -224,12 +210,9 @@ class EditFragment : Fragment() ,
                 REQUEST_MEDIA_PHOTO -> {
                     mediaPath = data?.data.toString()
                     val stream = requireActivity().contentResolver.openInputStream(Uri.parse(mediaPath))
-                    // By default, BitmapFactory.decodeFile sets the bitmap's density to the device default so, we need
-                    //  to correctly set the input density to 160 ourselves.
                     val options = BitmapFactory.Options()
                     options.inDensity = DisplayMetrics.DENSITY_DEFAULT
                     bitmap = BitmapFactory.decodeStream(stream, null, options)!!
-
                     insertImageAndSimulateUpload(bitmap, mediaPath)
                 }
                 REQUEST_MEDIA_CAMERA_VIDEO -> {
@@ -239,26 +222,20 @@ class EditFragment : Fragment() ,
                     mediaPath = data?.data.toString()
 
                     aztec.visualEditor.videoThumbnailGetter?.loadVideoThumbnail(mediaPath, object : Html.VideoThumbnailGetter.Callbacks {
-                        override fun onThumbnailFailed() {
-                        }
-
+                        override fun onThumbnailFailed() {}
                         override fun onThumbnailLoaded(drawable: Drawable?) {
                             val conf = Bitmap.Config.ARGB_8888 // see other conf types
                             bitmap = Bitmap.createBitmap(drawable!!.intrinsicWidth, drawable.intrinsicHeight, conf)
                             val canvas = Canvas(bitmap)
                             drawable.setBounds(0, 0, canvas.width, canvas.height)
                             drawable.draw(canvas)
-
                         //    insertVideoAndSimulateUpload(bitmap, mediaPath)
                         }
-
-                        override fun onThumbnailLoading(drawable: Drawable?) {
-                        }
+                        override fun onThumbnailLoading(drawable: Drawable?) {}
                     }, this.resources.displayMetrics.widthPixels)
                 }
             }
         }
-
         super.onActivityResult(requestCode, resultCode, data)
     }
 
@@ -311,7 +288,6 @@ class EditFragment : Fragment() ,
 
         var progress = 0
 
-        // simulate an upload delay
         val runnable = Runnable {
             aztec.visualEditor.setOverlayLevel(predicate, 1, progress)
             aztec.visualEditor.updateElementAttributes(predicate, attrs)
@@ -792,5 +768,8 @@ class EditFragment : Fragment() ,
 
     override fun onDestroyActionMode(p0: ActionMode?) {
     }
+
+
+
 
 }

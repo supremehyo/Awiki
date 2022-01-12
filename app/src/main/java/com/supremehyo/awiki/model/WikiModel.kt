@@ -2,6 +2,8 @@ package com.supremehyo.awiki.model
 
 import android.content.Context
 import com.supremehyo.awiki.repository.WikiContract
+import dagger.Provides
+
 
 interface WikiModel {
     fun insertWiki(dto : WikiContract)
