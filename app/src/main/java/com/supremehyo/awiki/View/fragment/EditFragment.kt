@@ -1,11 +1,11 @@
 package com.supremehyo.awiki.View.fragment
 
-
-
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -14,21 +14,23 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.os.Handler
+import android.provider.MediaStore
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.*
 import android.widget.PopupMenu
-import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.invalidateOptionsMenu
-import androidx.core.text.parseAsHtml
+import androidx.core.content.FileProvider
 import androidx.core.view.children
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import com.mobeedev.library.BuildConfig.APPLICATION_ID
+import com.supremehyo.awiki.BuildConfig.APPLICATION_ID
 import com.supremehyo.awiki.MainActionListener
 import com.supremehyo.awiki.R
 import com.supremehyo.awiki.databinding.FragmentEditBinding
@@ -36,6 +38,10 @@ import com.supremehyo.awiki.utils.MediaToolbarCameraButton
 import com.supremehyo.awiki.utils.MediaToolbarGalleryButton
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_edit.*
+import org.wordpress.android.util.AppLog
+import org.wordpress.android.util.ImageUtils
+import org.wordpress.android.util.PermissionUtils
+import org.wordpress.android.util.ToastUtils
 import org.wordpress.aztec.*
 import org.wordpress.aztec.glideloader.GlideImageLoader
 import org.wordpress.aztec.glideloader.GlideVideoThumbnailLoader
@@ -56,8 +62,8 @@ import org.wordpress.aztec.toolbar.AztecToolbar
 import org.wordpress.aztec.toolbar.IAztecToolbarClickListener
 import org.wordpress.aztec.util.AztecLog
 import org.xml.sax.Attributes
+import java.io.File
 import java.util.*
-
 //https://github.com/wordpress-mobile/AztecEditor-Android  라이브러리참고
 @AndroidEntryPoint
 class EditFragment : Fragment() ,
@@ -120,8 +126,6 @@ class EditFragment : Fragment() ,
         val view = binding.root
 
         getActivity()?.getWindow()?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-
-        // Setup hiding the action bar when the soft keyboard is displayed for narrow viewports
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
             && !resources.getBoolean(R.bool.is_large_tablet_landscape)) {
             mHideActionBarOnSoftKeyboardUp = true
@@ -130,6 +134,34 @@ class EditFragment : Fragment() ,
         visualEditor = view.findViewById<AztecText>(R.id.et_editor)
         sourceEditor = view.findViewById<SourceViewEditText>(R.id.tv_preview)
         toolbar = view.findViewById<AztecToolbar>(R.id.formatting_toolbar)
+
+
+        val galleryButton = MediaToolbarGalleryButton(toolbar)
+        galleryButton.setMediaToolbarButtonClickListener(object : IMediaToolbarButton.IMediaToolbarClickListener {
+            override fun onClick(view: View) {
+                mediaMenu = PopupMenu(context, view)
+                mediaMenu?.setOnMenuItemClickListener(this@EditFragment)
+                mediaMenu?.inflate(R.menu.menu_gallery)
+                mediaMenu?.show()
+                if (view is ToggleButton) {
+                    view.isChecked = false
+                }
+            }
+        })
+
+        val cameraButton = MediaToolbarCameraButton(toolbar)
+        cameraButton.setMediaToolbarButtonClickListener(object : IMediaToolbarButton.IMediaToolbarClickListener {
+            override fun onClick(view: View) {
+                mediaMenu = PopupMenu(context, view)
+                mediaMenu?.setOnMenuItemClickListener(this@EditFragment)
+                mediaMenu?.inflate(R.menu.menu_camera)
+                mediaMenu?.show()
+                if (view is ToggleButton) {
+                    view.isChecked = false
+                }
+            }
+        })
+
 
         aztec = Aztec.with(visualEditor, sourceEditor , toolbar, this)
             .setImageGetter(GlideImageLoader(requireContext()))
@@ -149,8 +181,9 @@ class EditFragment : Fragment() ,
             .addPlugin(VideoShortcodePlugin())
             .addPlugin(AudioShortcodePlugin())
             .addPlugin(HiddenGutenbergPlugin(visualEditor))
-
-        // initialize the plugins, text & HTML
+            .addPlugin(galleryButton)
+            .addPlugin(cameraButton)
+        
         if (!isRunningTest) {
             aztec.visualEditor.enableCrashLogging(object : AztecExceptionHandler.ExceptionHandlerHelper {
                 override fun shouldLog(ex: Throwable): Boolean {
@@ -177,26 +210,23 @@ class EditFragment : Fragment() ,
 
             when (requestCode) {
                 REQUEST_MEDIA_CAMERA_PHOTO -> {
-                    /*
-
                     // By default, BitmapFactory.decodeFile sets the bitmap's density to the device default so, we need
                     //  to correctly set the input density to 160 ourselves.
                     val options = BitmapFactory.Options()
                     options.inDensity = DisplayMetrics.DENSITY_DEFAULT
                     bitmap = BitmapFactory.decodeFile(mediaPath, options)
-                    insertImageAndSimulateUpload(bitmap, mediaPath)*/
+                    insertImageAndSimulateUpload(bitmap, mediaPath)
                 }
                 REQUEST_MEDIA_PHOTO -> {
-                    /*
                     mediaPath = data?.data.toString()
-                    val stream = contentResolver.openInputStream(Uri.parse(mediaPath))
+                    val stream = requireActivity().contentResolver.openInputStream(Uri.parse(mediaPath))
                     // By default, BitmapFactory.decodeFile sets the bitmap's density to the device default so, we need
                     //  to correctly set the input density to 160 ourselves.
                     val options = BitmapFactory.Options()
                     options.inDensity = DisplayMetrics.DENSITY_DEFAULT
-                    bitmap = BitmapFactory.decodeStream(stream, null, options)
+                    bitmap = BitmapFactory.decodeStream(stream, null, options)!!
 
-                    insertImageAndSimulateUpload(bitmap, mediaPath)*/
+                    insertImageAndSimulateUpload(bitmap, mediaPath)
                 }
                 REQUEST_MEDIA_CAMERA_VIDEO -> {
                     mediaPath = data?.data.toString()
@@ -228,7 +258,6 @@ class EditFragment : Fragment() ,
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    /*
     private fun insertImageAndSimulateUpload(bitmap: Bitmap?, mediaPath: String) {
         val bitmapResized = ImageUtils.getScaledBitmapAtLongestSide(bitmap, aztec.visualEditor.maxImagesWidth)
         val (id, attrs) = generateAttributesForMedia(mediaPath, isVideo = false)
@@ -243,7 +272,7 @@ class EditFragment : Fragment() ,
         aztec.visualEditor.insertVideo(BitmapDrawable(resources, bitmapResized), attrs)
         insertMediaAndSimulateUpload(id, attrs)
         aztec.toolbar.toggleMediaToolbar()
-    }*/
+    }
 
     private fun generateAttributesForMedia(mediaPath: String, isVideo: Boolean): Pair<String, AztecAttributes> {
         val id = Random().nextInt(Integer.MAX_VALUE).toString()
@@ -490,19 +519,19 @@ class EditFragment : Fragment() ,
 
         return when (item?.itemId) {
             R.id.take_photo -> {
-              //  onCameraPhotoMediaOptionSelected()
+                onCameraPhotoMediaOptionSelected()
                 true
             }
             R.id.take_video -> {
-              //  onCameraVideoMediaOptionSelected()
+                onCameraVideoMediaOptionSelected()
                 true
             }
             R.id.gallery_photo -> {
-               // onPhotosMediaOptionSelected()
+                onPhotosMediaOptionSelected()
                 true
             }
             R.id.gallery_video -> {
-               // onVideosMediaOptionSelected()
+                onVideosMediaOptionSelected()
                 true
             }
             else -> false
@@ -519,6 +548,149 @@ class EditFragment : Fragment() ,
         }
         return false
     }
+
+
+
+    private fun onCameraPhotoMediaOptionSelected() {
+        if (PermissionUtils.checkAndRequestCameraAndStoragePermissions(this, MEDIA_CAMERA_PHOTO_PERMISSION_REQUEST_CODE)) {
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE) // MediaStore 사용
+
+            mediaFile = "wp-" + System.currentTimeMillis() + ".jpg"
+            mediaPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString() +
+                    File.separator + "Camera" + File.separator + mediaFile
+            intent.putExtra(
+                MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(requireContext(),
+                "com.supremehyo.awiki" + ".provider", File(mediaPath)
+                ))
+
+            if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                startActivityForResult(intent, REQUEST_MEDIA_CAMERA_PHOTO)
+            }
+        }
+    }
+
+    private fun onCameraVideoMediaOptionSelected() {
+        if (PermissionUtils.checkAndRequestCameraAndStoragePermissions(this, MEDIA_CAMERA_PHOTO_PERMISSION_REQUEST_CODE)) {
+            val intent = Intent(MediaStore.INTENT_ACTION_VIDEO_CAMERA)
+
+            if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                startActivityForResult(intent, REQUEST_MEDIA_CAMERA_VIDEO)
+            }
+        }
+    }
+
+    private fun onPhotosMediaOptionSelected() {
+        if (PermissionUtils.checkAndRequestStoragePermission(this, MEDIA_PHOTOS_PERMISSION_REQUEST_CODE)) {
+            val intent: Intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                Intent(Intent.ACTION_OPEN_DOCUMENT)
+            } else {
+                Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT), getString(R.string.title_select_photo))
+            }
+
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+            intent.type = "image/*"
+
+            try {
+                startActivityForResult(intent, REQUEST_MEDIA_PHOTO)
+            } catch (exception: ActivityNotFoundException) {
+                AppLog.e(AppLog.T.EDITOR, exception.message)
+             //   ToastUtils.showToast(this, getString(R.string.error_chooser_photo), ToastUtils.Duration.LONG)
+            }
+        }
+    }
+
+    private fun onVideosMediaOptionSelected() {
+        if (PermissionUtils.checkAndRequestStoragePermission(this, MEDIA_PHOTOS_PERMISSION_REQUEST_CODE)) {
+            val intent: Intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                Intent(Intent.ACTION_OPEN_DOCUMENT)
+            } else {
+                Intent.createChooser(Intent(Intent.ACTION_GET_CONTENT), getString(R.string.title_select_video))
+            }
+
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+            intent.type = "video/*"
+
+            try {
+                startActivityForResult(intent, REQUEST_MEDIA_VIDEO)
+            } catch (exception: ActivityNotFoundException) {
+                AppLog.e(AppLog.T.EDITOR, exception.message)
+            //    ToastUtils.showToast(this, getString(R.string.error_chooser_video), ToastUtils.Duration.LONG)
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when (requestCode) {
+            MEDIA_CAMERA_PHOTO_PERMISSION_REQUEST_CODE,
+            MEDIA_CAMERA_VIDEO_PERMISSION_REQUEST_CODE -> {
+                var isPermissionDenied = false
+
+                for (i in grantResults.indices) {
+                    when (permissions[i]) {
+                        Manifest.permission.CAMERA -> {
+                            if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                                isPermissionDenied = true
+                            }
+                        }
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE -> {
+                            if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                                isPermissionDenied = true
+                            }
+                        }
+                    }
+                }
+
+                if (isPermissionDenied) {
+                  //  ToastUtils.showToast(this, getString(R.string.permission_required_media_camera))
+                } else {
+                    when (requestCode) {
+                        MEDIA_CAMERA_PHOTO_PERMISSION_REQUEST_CODE -> {
+                            onCameraPhotoMediaOptionSelected()
+                        }
+                        MEDIA_CAMERA_VIDEO_PERMISSION_REQUEST_CODE -> {
+                            onCameraVideoMediaOptionSelected()
+                        }
+                    }
+                }
+            }
+            MEDIA_PHOTOS_PERMISSION_REQUEST_CODE,
+            MEDIA_VIDEOS_PERMISSION_REQUEST_CODE -> {
+                var isPermissionDenied = false
+
+                for (i in grantResults.indices) {
+                    when (permissions[i]) {
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE -> {
+                            if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                                isPermissionDenied = true
+                            }
+                        }
+                    }
+                }
+
+                when (requestCode) {
+                    MEDIA_PHOTOS_PERMISSION_REQUEST_CODE -> {
+                        if (isPermissionDenied) {
+                         //   ToastUtils.showToast(this, getString(R.string.permission_required_media_photos))
+                        } else {
+                            onPhotosMediaOptionSelected()
+                        }
+                    }
+                    MEDIA_VIDEOS_PERMISSION_REQUEST_CODE -> {
+                        if (isPermissionDenied) {
+                        //    ToastUtils.showToast(this, getString(R.string.permission_required_media_videos))
+                        } else {
+                            onVideosMediaOptionSelected()
+                        }
+                    }
+                }
+            }
+            else -> {
+            }
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
 
     private fun hideActionBarIfNeeded() {
 /*

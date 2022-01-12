@@ -2,6 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.supremehyo.awiki">
 
+
+    <!-- Required for downloading images -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Required for adding media and requested at runtime -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
+
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
@@ -12,6 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:windowSoftInputMode="adjustResize|stateHidden"
             android:name=".View.SplashActivity"
             android:exported="true" >
             <intent-filter>
@@ -24,6 +35,21 @@
             android:name=".MainActivity"
             android:exported="true">
         </activity>
+
+        <!--  file URIs -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" >
+            </meta-data>
+
+        </provider>
+
     </application>
 
 </manifest>

@@ -135,6 +135,7 @@ class CssStyleFormatter {
             mergedArray.forEach({
                 style = style + it + ";"
             })
+
             return style.trimEnd()
         }
     }

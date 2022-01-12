@@ -51,6 +51,7 @@ dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.1.0@aar'
+    implementation "org.wordpress:utils:$wordpressUtilsVersion"
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
     implementation 'com.czerwii:SlidingdrawerMenu:1.0.1'

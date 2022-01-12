@@ -7,5 +7,5 @@
     <string name="action_format_bold">Bold</string>
     <string name="action_format_italic">Italic</string>
 
-    <string name="hint_input_text">Input your text here…</string>
+    <string name="hint_input_text">여기에 위키를 편집하세요.</string>
 </resources>
