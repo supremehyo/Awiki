@@ -29,6 +29,7 @@ import androidx.core.content.FileProvider
 import androidx.core.view.children
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.mobeedev.library.BuildConfig.APPLICATION_ID
 import com.supremehyo.awiki.BuildConfig.APPLICATION_ID
 import com.supremehyo.awiki.MainActionListener
@@ -36,6 +37,7 @@ import com.supremehyo.awiki.R
 import com.supremehyo.awiki.databinding.FragmentEditBinding
 import com.supremehyo.awiki.utils.MediaToolbarCameraButton
 import com.supremehyo.awiki.utils.MediaToolbarGalleryButton
+import com.supremehyo.awiki.viewmodel.EditFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_edit.*
 import org.wordpress.android.util.AppLog
@@ -105,7 +107,6 @@ class EditFragment : Fragment() ,
     private val REQUEST_MEDIA_CAMERA_VIDEO: Int = 2002
     private val REQUEST_MEDIA_PHOTO: Int = 2003
     private val REQUEST_MEDIA_VIDEO: Int = 2004
-
     private val isRunningTest: Boolean by lazy {
         try {
             Class.forName("androidx.test.espresso.Espresso")
@@ -114,6 +115,9 @@ class EditFragment : Fragment() ,
             false
         }
     }
+
+    private val viewModel: EditFragmentViewModel by viewModels() // hilt 로 editfragment viewmodel 주입
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

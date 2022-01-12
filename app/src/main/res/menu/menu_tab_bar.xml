@@ -25,4 +25,12 @@
         android:enabled="true"
         android:title="작성한 글"/>
 
+    <item
+        android:id="@+id/memeCreateFragment"
+        android:icon="@drawable/ic_baseline_note_24"
+        android:enabled="true"
+        android:title="밈 생성"/>
+
+
+
 </menu>
