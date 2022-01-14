@@ -1,7 +1,6 @@
 package com.supremehyo.awiki
 
 import android.app.Application
-import com.supremehyo.awiki.repository.WikiDatabase
 import dagger.hilt.android.HiltAndroidApp
 
 

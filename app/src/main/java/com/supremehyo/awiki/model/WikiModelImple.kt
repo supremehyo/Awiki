@@ -2,8 +2,8 @@ package com.supremehyo.awiki.model
 
 import android.content.Context
 import android.util.Log
-import com.supremehyo.awiki.repository.WikiContract
-import com.supremehyo.awiki.repository.WikiDatabase
+import com.supremehyo.awiki.repository.wiki.WikiContract
+import com.supremehyo.awiki.repository.wiki.WikiDatabase
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton

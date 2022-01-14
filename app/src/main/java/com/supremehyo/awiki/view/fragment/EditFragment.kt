@@ -34,7 +34,7 @@ import androidx.fragment.app.viewModels
 import com.supremehyo.awiki.MainActionListener
 import com.supremehyo.awiki.R
 import com.supremehyo.awiki.databinding.FragmentEditBinding
-import com.supremehyo.awiki.repository.WikiContract
+import com.supremehyo.awiki.repository.wiki.WikiContract
 import com.supremehyo.awiki.utils.MediaToolbarCameraButton
 import com.supremehyo.awiki.utils.MediaToolbarGalleryButton
 import com.supremehyo.awiki.viewmodel.EditFragmentViewModel

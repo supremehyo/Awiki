@@ -1,27 +1,30 @@
-package com.supremehyo.awiki.repository
+package com.supremehyo.awiki.repository.user
 
 import android.content.Context
-import androidx.room.*
-import androidx.sqlite.db.SupportSQLiteOpenHelper
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.supremehyo.awiki.repository.wiki.WikiContract
+import com.supremehyo.awiki.repository.wiki.WikiDAO
 
 
 @Database(entities = [WikiContract::class], version = 1, exportSchema = false)
-    abstract class WikiDatabase : RoomDatabase(){
+abstract class UserDatabase : RoomDatabase(){
 
     abstract fun contactsDao(): WikiDAO// DAO로 접근 할수 있도록
     //추상 함수로 선언해둠.
 
     //싱글톤으로 만들어서 메모리 절약
     companion object {
-        private var instance: WikiDatabase? = null
+        private var instance: UserDatabase? = null
 
         @Synchronized
-        fun getInstance(context: Context): WikiDatabase? {
+        fun getInstance(context: Context): UserDatabase? {
             if (instance == null) {
                 instance = Room.databaseBuilder(
                     context.applicationContext,
-                    WikiDatabase::class.java,
-                    "database-contacts"
+                    UserDatabase::class.java,
+                    "database-contacts-user"
                 )
                     .allowMainThreadQueries()
                     .build()

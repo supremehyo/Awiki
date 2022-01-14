@@ -1,4 +1,4 @@
-package com.supremehyo.awiki.repository
+package com.supremehyo.awiki.repository.wiki
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

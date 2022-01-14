@@ -1,4 +1,4 @@
-package com.supremehyo.awiki.repository
+package com.supremehyo.awiki.repository.wiki
 
 data class WikiDTO(
     var date: String, //작성일자

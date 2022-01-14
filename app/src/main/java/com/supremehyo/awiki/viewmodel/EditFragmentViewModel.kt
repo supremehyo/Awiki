@@ -7,11 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.supremehyo.awiki.base.BaseViewModel
 import com.supremehyo.awiki.model.WikiModelImple
-import com.supremehyo.awiki.repository.WikiContract
+import com.supremehyo.awiki.repository.wiki.WikiContract
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.supremehyo.awiki.repository
+package com.supremehyo.awiki.repository.wiki
 
 import androidx.room.Dao
 import androidx.room.Insert
