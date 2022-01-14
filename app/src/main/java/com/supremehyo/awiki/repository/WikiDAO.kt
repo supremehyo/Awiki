@@ -14,14 +14,14 @@ interface WikiDAO {
 
 
     @Query("SELECT * FROM tb_wiki where title =:title")
-    fun getOneWiki(title: String): WikiContract
+     fun getOneWiki(title: String): WikiContract
 
     @Update
-    fun editWiki(vararg contacts: WikiContract)
+     fun editWiki(vararg contacts: WikiContract)
 
     @Insert
-    fun insertWiki(contacts: WikiContract) : Long
+     fun insertWiki(contacts: WikiContract) : Long
 
     @Query("DELETE FROM tb_wiki where id =:long ")
-    fun deleteWiki(long: Long)
+     fun deleteWiki(long: Long)
 }

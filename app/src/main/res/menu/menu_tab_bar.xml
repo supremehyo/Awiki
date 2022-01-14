@@ -11,7 +11,7 @@
         android:id="@+id/writeFragment"
         android:icon="@drawable/ic_baseline_mode_edit_outline_24"
         android:enabled="true"
-        android:title="글작성"/>
+        android:title="위키 생성"/>
 
     <item
         android:id="@+id/interestFragment"
@@ -29,7 +29,7 @@
         android:id="@+id/memeCreateFragment"
         android:icon="@drawable/ic_baseline_note_24"
         android:enabled="true"
-        android:title="밈 생성"/>
+        android:title="위키 편집"/>
 
 
 

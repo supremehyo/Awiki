@@ -23,7 +23,7 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:windowSoftInputMode="adjustResize|stateHidden"
-            android:name=".View.SplashActivity"
+            android:name=".view.SplashActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

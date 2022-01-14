@@ -10,6 +10,7 @@ import android.text.Editable
 import android.text.SpannableStringBuilder
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
@@ -192,16 +193,24 @@ open class SourceViewEditText : AppCompatEditText, TextWatcher {
 
     fun displayStyledAndFormattedHtml(source: String) {
         val styledHtml = styleHtml(Format.addSourceEditorFormatting(source, isInCalypsoMode))
-
+        Log.v("gmdmazz" , source)
         disableTextChangedListener()
         val cursorPosition = consumeCursorTag(styledHtml)
         text = styledHtml
+        Log.v(" gmdma2" , text.toString())
         initialEditorContentParsedSHA256 = AztecText.calculateInitialHTMLSHA(getPureHtml(false),
                 initialEditorContentParsedSHA256)
         enableTextChangedListener()
 
         if (cursorPosition > 0)
             setSelection(cursorPosition)
+    }
+
+    fun getHtmlCode(source: String) : String{
+        val styledHtml = styleHtml(Format.addSourceEditorFormatting(source, isInCalypsoMode))
+        text = styledHtml
+
+        return text.toString()
     }
 
     fun consumeCursorTag(styledHtml: SpannableStringBuilder): Int {

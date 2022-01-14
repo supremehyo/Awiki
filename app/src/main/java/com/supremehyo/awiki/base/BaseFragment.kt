@@ -9,11 +9,11 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 
-abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel>() : Fragment(){
+abstract class BaseFragment<B : ViewDataBinding>() : Fragment(){
 
     private lateinit var binding: B
 
-    abstract val viewModel: VM
+  //  abstract val viewModel: VM
     abstract val layoutResourceId: Int
 
 
@@ -35,9 +35,6 @@ abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel>() : Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
-
-
-
         return binding.root
     }
 

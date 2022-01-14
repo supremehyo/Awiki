@@ -44,6 +44,7 @@ import android.text.TextWatcher
 import android.text.style.SuggestionSpan
 import android.util.AttributeSet
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -1851,6 +1852,7 @@ open class AztecText : AppCompatEditText, TextWatcher, UnknownHtmlSpan.OnUnknown
         val source = dialogView.findViewById<SourceViewEditText>(R.id.source)
 
         var editHtml = html
+        Log.v("asdfasg" , editHtml )
         if (TextUtils.isEmpty(editHtml)) {
             editHtml = unknownHtmlSpan.rawHtml.toString()
         }

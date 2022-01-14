@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "tb_wiki")//테이블 이름
 data class WikiContract (
     //컬럼생성
-    @PrimaryKey(autoGenerate = true) val id: Long,
+    @PrimaryKey(autoGenerate = true) val id: Long?,
     var date: String, //작성일자
     var title: String, //위키 제목
     var category: String, //위키 카테고리

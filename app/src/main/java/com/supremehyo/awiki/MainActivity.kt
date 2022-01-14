@@ -7,14 +7,12 @@ import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import com.google.android.material.navigation.NavigationView
-import com.supremehyo.awiki.View.fragment.EditFragment
-import com.supremehyo.awiki.View.fragment.HomeFragment
-import com.supremehyo.awiki.View.fragment.InterestFragment
-import com.supremehyo.awiki.View.fragment.MywikiFragment
+import com.supremehyo.awiki.view.fragment.EditFragment
+import com.supremehyo.awiki.view.fragment.HomeFragment
+import com.supremehyo.awiki.view.fragment.InterestFragment
+import com.supremehyo.awiki.view.fragment.MywikiFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -64,8 +62,11 @@ class MainActivity : AppCompatActivity() {
                 return false;
             }
         })
+        //로고 클릭시 홈으로 이동
+        awiki_logo.setOnClickListener {
+            replaceFragment(homeFragment)
+        }
     }
-
 
     fun replaceFragment(fragment: Fragment){
         val fragmentTransaction = supportFragmentManager.beginTransaction()

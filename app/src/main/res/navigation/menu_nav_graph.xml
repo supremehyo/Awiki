@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.supremehyo.awiki.View.fragment.HomeFragment"
+        android:name="com.supremehyo.awiki.view.fragment.HomeFragment"
         android:label="CountryFragment"
         tools:layout="@layout/fragment_home" >
         <action
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/writeFragment"
-        android:name="com.supremehyo.awiki.View.fragment.EditFragment"
+        android:name="com.supremehyo.awiki.view.fragment.EditFragment"
         android:label="CountryFragment"
         tools:layout="@layout/fragment_edit" >
     </fragment>

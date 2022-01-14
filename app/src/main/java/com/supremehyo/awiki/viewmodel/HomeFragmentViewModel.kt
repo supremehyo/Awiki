@@ -12,9 +12,5 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeFragmentViewModel @Inject constructor(private val model : WikiModelImple) : BaseViewModel() {
 
-    //wiki 하나 가져오기
-    fun getWiki(title : String){
-       var wiki =  model.getOneWiki(title)
-    }
 
 }
