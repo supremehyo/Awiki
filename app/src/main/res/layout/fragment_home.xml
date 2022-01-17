@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     
     <data>
         <variable
@@ -10,16 +12,15 @@
 
 
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".view.fragment.HomeFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textField"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        style="@style/EditTextGreyStyle"
+        android:theme="@style/EditTextGreyStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="30dp"
@@ -32,6 +33,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/search_et"
             android:hint="검색어를 입력해주세요."
+            android:textColor="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -51,6 +53,16 @@
         app:layout_constraintWidth_percent="0.85"></ImageView>
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"></androidx.recyclerview.widget.RecyclerView>
+<!--
     <TextView
         android:id="@+id/wiki_title"
         android:layout_width="wrap_content"
@@ -63,17 +75,20 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView">
     </TextView>
 
-    <TextView
+
+    <org.wordpress.aztec.AztecText
         android:id="@+id/wiki_subcontent"
-        android:text="모두에 의한\n모두를 위한 위키입니다."
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:padding="16dp"
+        android:textSize="14dp"
+        app:layout_constraintHeight_percent="0.4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wiki_title"
-        app:layout_constraintWidth_percent="0.85"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/wiki_title" />
+-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

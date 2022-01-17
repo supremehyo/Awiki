@@ -21,6 +21,16 @@
         <item name="rippleColor">#CCCCCC</item>
     </style>
 
+    <style name="EditTextGreyStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"> // important : parent 를 이것으로.
+        <item name="colorControlNormal">@color/colorPrimary</item>  // unFocus 상태일때 밑줄 색.
+        <item name="boxStrokeColor">@color/colorPrimary</item> // Focus 상태일때 밑줄 색.
+        <item name="android:textCursorDrawable">@color/colorPrimary</item>  // cursor 색.
+        <item name="android:textColorHint">@color/colorPrimary</item>  // hint 색
+        <item name="hintTextColor">@color/colorPrimary</item>   // floating hint 색
+        <item name="helperTextTextColor">@color/colorPrimary</item>
+        <item name="errorTextColor">@color/colorPrimary</item>
+
+    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

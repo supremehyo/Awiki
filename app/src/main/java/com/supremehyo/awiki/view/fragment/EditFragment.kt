@@ -201,8 +201,6 @@ class EditFragment : Fragment() ,
             .addPlugin(galleryButton)
             .addPlugin(cameraButton)
 
-
-
         initHtmltoString("")
 
         if (!isRunningTest) {
@@ -264,9 +262,9 @@ class EditFragment : Fragment() ,
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    fun saveWiki(title : String , category : String , date : String , content : String , image: String ){
+    fun saveWiki(title : String , category : String , date : String , content : String , image: String){
         var tempDto = WikiContract(null,date,title,category,content,image)
-        viewModel.insertWiki(tempDto)
+        viewModel.insertWiki(tempDto , "local") // api 통신할거면 여기에 api를 적을것
     }
 
 
