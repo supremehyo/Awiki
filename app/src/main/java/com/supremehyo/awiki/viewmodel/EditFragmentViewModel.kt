@@ -64,8 +64,6 @@ class EditFragmentViewModel @Inject constructor(private val model : WikiModelImp
         viewModelScope.launch {
             var searchWiki = model.getWikiListBySearch(title)
             if(searchWiki != null){
-                Log.v("rerere2" , title )
-                Log.v("rerere3" ,searchWiki.get(0).title)
                 _wikiDTOListLiveData.postValue(searchWiki)
             }
         }

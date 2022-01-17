@@ -4,6 +4,7 @@ import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,7 +34,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
     private val mHandler: Handler = Handler()
     var title : String = ""
 
-
     private var dtoList :ArrayList<WikiContract> = ArrayList() //전체 검색값
     private var items: ArrayList<WikiContract?> = ArrayList() //지금 리사이클러뷰에만 보여주고 있는 list값
     private lateinit var mMapLayoutManager: LinearLayoutManager
@@ -43,7 +43,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
 
 
     override fun initStartView() {
-        viewModel.getWiki("title1" , requireContext() , "local")
+        //viewModel.getWiki("title1" , requireContext() , "local")
         initAdapter()
         initScrollListener()
     }
@@ -67,20 +67,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
             initAdapter()
             isLoading =false
 
+
             if(search_et.text.toString().isEmpty()) {
                 viewModel.gonull()
+                imageView.visibility = View.VISIBLE
             }
 
             if(it!= null){
                 dtoList= listToArrayList(it)
                 if(dtoList.size > 5){
                     for (i in 0 until 5){// 5보다 크면 5개까지만 끊어서 넣어줘라
-                        Log.v("rerere5" ,dtoList[i].title)
+                        imageView.visibility = View.GONE
                         items.add(dtoList[i])
                     }
                 }else{
                     dtoList.forEach {//그보다 적으면 그냥 다 집어넣으면 된다.
-                        Log.v("rerere5" ,it.title)
+                        imageView.visibility = View.GONE
                         items.add(it)
                     }
                 }
@@ -107,9 +109,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
                         override fun run() {
                             viewModel.getWikiListBySearch(title.toString())
                         }
-                    },
-                    DELAY
-                )
+                    }, DELAY)
             }
         })
     }
@@ -128,8 +128,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
                 super.onScrolled(recyclerView, dx, dy)
                 if(!isLoading){
                     if ((recyclerView.layoutManager as LinearLayoutManager?)!!.findLastCompletelyVisibleItemPosition() == items.size - 1){
-                        Log.e("true", "True")
-                        Log.e("true2" , (items.size - 1).toString())
                         moreItems()
                         isLoading =  true
                     }
@@ -138,6 +136,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
         })
     }
 
+    //list 를 arraylist 로 바꿔주는 함수
     fun listToArrayList(list : List<WikiContract>) : ArrayList<WikiContract> {
         var tempArrayList : ArrayList<WikiContract> = ArrayList()
         list.forEach {
