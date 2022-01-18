@@ -28,12 +28,18 @@ class EditFragmentViewModel @Inject constructor(private val model : WikiModelImp
     val wikiDTOListLiveData: LiveData<List<WikiContract>>
         get() = _wikiDTOListLiveData
 
+    private  val _wikiDTOInsertLiveData = MutableLiveData<Long>()
+    val wikiDTOInsertLiveData: LiveData<Long>
+        get() = _wikiDTOInsertLiveData
+
     //wiki 저장하기
     fun insertWiki(dto : WikiContract , localOrApi : String ){
         Log.v("sfdsdf333" , dto.content)
+        var temp = 0L
         viewModelScope.launch { // 코루틴 적용
             Log.v("awgewgg2" , dto.content)
-            model.insertWiki(dto ,localOrApi)
+            temp = model.insertWiki(dto ,localOrApi)
+            _wikiDTOInsertLiveData.postValue(temp)
         }
     }
 

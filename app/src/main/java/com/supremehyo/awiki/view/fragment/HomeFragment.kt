@@ -5,8 +5,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.supremehyo.awiki.R
@@ -30,7 +32,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
 
     override val layoutResourceId: Int
         get() = R.layout.fragment_home
-    private val viewModel: EditFragmentViewModel by viewModels() // hilt 로 editfragment viewmodel 주입
+    private val viewModel: EditFragmentViewModel by activityViewModels() // hilt 로 editfragment viewmodel 주입
+
+
     private val mHandler: Handler = Handler()
     var title : String = ""
 
@@ -128,8 +132,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
                 super.onScrolled(recyclerView, dx, dy)
                 if(!isLoading){
                     if ((recyclerView.layoutManager as LinearLayoutManager?)!!.findLastCompletelyVisibleItemPosition() == items.size - 1){
-                        moreItems()
-                        isLoading =  true
+                        if(dtoList.size > 5){
+                            moreItems()
+                            isLoading =  true
+                        }
                     }
                 }
             }
@@ -158,6 +164,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
         CoroutineScope(Dispatchers.Main).launch {
             delay(2000)
             val runnable2=  Runnable{
+                Log.v("sdfsdf" ,items.size.toString())
                 items.removeAt(items.size - 1)
                 val scrollPosition = items.size
                 mListAdapter.notifyItemRemoved(scrollPosition) // 프로그래스바 삭제

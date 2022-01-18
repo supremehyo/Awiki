@@ -23,6 +23,7 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
 import android.widget.PopupMenu
+import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.ActivityCompat
@@ -30,8 +31,10 @@ import androidx.core.content.FileProvider
 import androidx.core.view.children
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.supremehyo.awiki.MainActionListener
+import com.supremehyo.awiki.MainActivity
 import com.supremehyo.awiki.R
 import com.supremehyo.awiki.databinding.FragmentEditBinding
 import com.supremehyo.awiki.repository.wiki.WikiContract
@@ -105,6 +108,7 @@ class EditFragment : Fragment() ,
 
     var editorContentParsedSHA256LastSwitch: ByteArray = ByteArray(0)
     var sourceContentParsedSHA256LastSwitch: ByteArray = ByteArray(0)
+    var homeFragment = HomeFragment()
 
     private val isRunningTest: Boolean by lazy {
         try {
@@ -115,12 +119,19 @@ class EditFragment : Fragment() ,
         }
     }
 
-    private val viewModel: EditFragmentViewModel by viewModels() // hilt 로 editfragment viewmodel 주입
+    private val viewModel: EditFragmentViewModel by activityViewModels() // hilt 로 editfragment viewmodel 주입
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
+        //글이 작성되었을때 리턴값을 받아와서 그때 toast 를 보내는 함수
+        viewModel.wikiDTOInsertLiveData.observe(this , androidx.lifecycle.Observer {
+            if(it != 0L){
+                Toast.makeText(context, "발행되었습니다.", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(context, "오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -174,10 +185,11 @@ class EditFragment : Fragment() ,
                 sourceEditor!!.displayStyledAndFormattedHtml(editorHtml)
             }
             editorContentParsedSHA256LastSwitch = sha256
-            Log.v("sfdsdf" , sourceEditor.text.toString())
+            Log.v("sfdsdf" , visualEditor.text.toString())
 
             ////html으로 바로 변경
-            saveWiki(edit_title.text.toString() , edit_category.text.toString() ,"" , sourceEditor.text.toString() , "")
+            saveWiki(edit_title.text.toString() , edit_category.text.toString() ,
+                "" , sourceEditor.text.toString() , "" , visualEditor.text.toString())
         }
 
         aztec = Aztec.with(visualEditor, sourceEditor , toolbar, this)
@@ -217,6 +229,8 @@ class EditFragment : Fragment() ,
         invalidateOptionsHandler = Handler()
         invalidateOptionsRunnable = Runnable {invalidateOptionsRunnable}
         initView()
+
+
         return view
     }
 
@@ -262,10 +276,11 @@ class EditFragment : Fragment() ,
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    fun saveWiki(title : String , category : String , date : String , content : String , image: String){
-        var tempDto = WikiContract(null,date,title,category,content,image)
+    fun saveWiki(title : String , category : String , date : String , content : String , image: String , rawContent: String){
+        var tempDto = WikiContract(null,date,title,category,content,image , rawContent)
         viewModel.insertWiki(tempDto , "local") // api 통신할거면 여기에 api를 적을것
     }
+
 
 
     //db에서 html 코드를 불러왔을때 그걸 위키 형식에 맞게 자동으로 변환해주는 함수

@@ -16,16 +16,20 @@ class WikiModelImple @Inject constructor ( //Inject는 힐트가 생성자를 �
     @ApplicationContext private val context : Context) : WikiModel{ // context를 hilt 인자로 넘길때 ApplicationContext 가 필요
 
 
-    override suspend fun insertWiki(dto: WikiContract , localOrApi : String) {
+    override suspend fun insertWiki(dto: WikiContract , localOrApi : String) : Long {
+        var aaaa = 0L
         when(localOrApi){
             "local" ->{
                 val wikidao = WikiDatabase.getInstance(context)!!.contactsDao()
-                var aaaa =  wikidao.insertWiki(dto)
+                aaaa =  wikidao.insertWiki(dto)
+                return aaaa
             }"api" ->{
               val wikidao = WikiDatabase.getInstance(context)!!.contactsDao()
-                var aaaa =  wikidao.insertWiki(dto)
+                 aaaa =  wikidao.insertWiki(dto)
+                return aaaa
             }
         }
+        return aaaa
     }
     override suspend fun getOneWiki(title: String , context  : Context , localOrApi : String): WikiContract {
         if(localOrApi == "local"){

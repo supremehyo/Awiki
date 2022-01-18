@@ -67,23 +67,6 @@ class HomeRecyclerViewAdapter(items: List<WikiContract?>?) : RecyclerView.Adapte
     inner class ItemViewHolder(var binding: WikiItemRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: WikiContract){
             binding.wikiTitle.text = item.title
-            /*
-            binding.nameTxtView.text = "item"
-            binding.typeTxtView.text = item.type
-            if (item.progress == 100){
-                binding.progressTxtView.setTextColor(Color.parseColor("#B0FFFF"))
-            }
-            binding.progressTxtView.text = ("${item.progress}% 완료")
-
-
-            Glide.with(context!!)
-                .load(item.thumbnail)
-                .apply(RequestOptions.bitmapTransform(RoundedCorners(15)))
-                .thumbnail(0.5f)
-                .into(binding.imgView)
-            binding.imgView.clipToOutline = true
-
-             */
 
         }
 

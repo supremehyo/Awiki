@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 //https://kangmin1012.tistory.com/33  코디네이트
 //이 링크는 상세 글보기에서 나와야함.
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
