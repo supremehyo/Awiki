@@ -49,6 +49,9 @@
             app:layout_constraintTop_toTopOf="parent" />
     </FrameLayout>
 
+
+    <!-- https://github.com/Yalantis/OfficialFoldingTabBar.Android
+     드로어 메뉴 말고 이걸 앱바에 집어넣어서 좀 더 쓰기 편하게 변경 -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
         app:menu="@menu/menu_tab_bar"

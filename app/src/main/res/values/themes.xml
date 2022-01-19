@@ -26,7 +26,7 @@
         <item name="colorControlNormal">@color/colorBoulder</item>  // unFocus 상태일때 밑줄 색.
         <item name="boxStrokeColor">#FF5757</item> // Focus 상태일때 밑줄 색.
         <item name="android:textCursorDrawable">@color/colorPrimary</item>  // cursor 색.
-        <item name="android:textColorHint">#000000</item>  // hint 색
+        <item name="android:textColorHint">@color/colorBoulder</item>  // hint 색
         <item name="hintTextColor">#FF5757</item>   // floating hint 색
         <item name="helperTextTextColor">@color/colorPrimary</item>
         <item name="errorTextColor">@color/colorPrimary</item>

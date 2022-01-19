@@ -72,21 +72,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
             isLoading =false
 
 
+
             if(search_et.text.toString().isEmpty()) {
                 viewModel.gonull()
-                imageView.visibility = View.VISIBLE
+                linearLayout.visibility = View.VISIBLE
+              //  imageView.visibility = View.VISIBLE
             }
 
             if(it!= null){
+                linearLayout.visibility = View.GONE
                 dtoList= listToArrayList(it)
                 if(dtoList.size > 5){
                     for (i in 0 until 5){// 5보다 크면 5개까지만 끊어서 넣어줘라
-                        imageView.visibility = View.GONE
+                     //   imageView.visibility = View.GONE
                         items.add(dtoList[i])
                     }
                 }else{
                     dtoList.forEach {//그보다 적으면 그냥 다 집어넣으면 된다.
-                        imageView.visibility = View.GONE
+                      //  imageView.visibility = View.GONE
                         items.add(it)
                     }
                 }
