@@ -33,7 +33,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/search_et"
             android:hint="검색어를 입력해주세요."
-            android:textColor="@color/colorPrimary"
+            android:textColor="#FF5757"
+            android:outlineSpotShadowColor="@color/blue_light"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>

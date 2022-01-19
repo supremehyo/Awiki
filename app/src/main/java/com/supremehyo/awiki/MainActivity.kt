@@ -1,5 +1,6 @@
 package com.supremehyo.awiki
 
+import android.annotation.SuppressLint
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,12 +8,11 @@ import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.fragment.app.Fragment
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
+import androidx.navigation.plusAssign
 import com.google.android.material.navigation.NavigationView
-import com.supremehyo.awiki.view.fragment.EditFragment
-import com.supremehyo.awiki.view.fragment.HomeFragment
-import com.supremehyo.awiki.view.fragment.InterestFragment
-import com.supremehyo.awiki.view.fragment.MywikiFragment
+import com.supremehyo.awiki.navigation.KeepStateNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -21,40 +21,37 @@ import kotlinx.android.synthetic.main.activity_main.*
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        var homeFragment = HomeFragment()
-        var editFragment = EditFragment()
-        var mywikiFragment = MywikiFragment()
-        var interestFragment = InterestFragment()
-
-        //초기에 home 으로 화면
-        replaceFragment(homeFragment)
 
         navigationView.setNavigationItemSelectedListener(object : NavigationView.OnNavigationItemSelectedListener{
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
                 when(item.itemId){
                     R.id.homeFragment ->{
                         item.isCheckable = true
-                        replaceFragment(homeFragment)
+                        findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_homeFragment)
+                        drawer_layout.closeDrawers()
                         return true
                     }
                     R.id.writeFragment ->{
                         item.isCheckable = true
-                        replaceFragment(editFragment)
+                        var bundle = bundleOf("readorwrite" to "write")
+                        findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_writeFragment , bundle)
+                        drawer_layout.closeDrawers()
                         return true
                     }
 
                     R.id.mywikiFragment ->{
                         item.isCheckable = true
-                        replaceFragment(mywikiFragment)
+                        drawer_layout.closeDrawers()
                         return true
                     }
                     R.id.interestFragment ->{
                         item.isCheckable = true
-                        replaceFragment(interestFragment)
+                        findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_interestFragment)
+                        drawer_layout.closeDrawers()
                         return true
                     }
                 }
@@ -63,16 +60,28 @@ class MainActivity : AppCompatActivity() {
         })
         //로고 클릭시 홈으로 이동
         awiki_logo.setOnClickListener {
-            replaceFragment(homeFragment)
+            findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_homeFragment)
         }
+
+
+        val navController = findNavController(R.id.nav_host_fragment)
+
+        // get fragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)!!
+
+        // setup custom navigator
+        val navigator = KeepStateNavigator(this, navHostFragment.childFragmentManager, R.id.nav_host_fragment)
+        navController.navigatorProvider += navigator
+        navController.setGraph(R.navigation.menu_nav_graph)
     }
 
+    /*
     fun replaceFragment(fragment: Fragment){
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         drawer_layout.closeDrawers()
         fragmentTransaction.replace(R.id.main_nav_host,fragment)
         fragmentTransaction.commit()
-    }
+    }*/
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         val focusView: View? = currentFocus

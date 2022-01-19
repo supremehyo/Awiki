@@ -120,7 +120,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
 
     //빈 RecyclerView 생성
     private fun initAdapter(){
-        mListAdapter = HomeRecyclerViewAdapter(items)
+        mListAdapter = HomeRecyclerViewAdapter(activity!!,items , viewModel)
         mMapLayoutManager = LinearLayoutManager(requireContext())
         home_recyclerView.adapter = mListAdapter
     }

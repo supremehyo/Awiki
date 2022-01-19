@@ -19,13 +19,16 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.provider.MediaStore
+import android.text.InputType
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
+import android.widget.EditText
 import android.widget.PopupMenu
 import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.constraintlayout.utils.widget.MotionButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.core.view.children
@@ -33,17 +36,26 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
+import com.supremehyo.awiki.DTO.HometoEditDTO
 import com.supremehyo.awiki.MainActionListener
 import com.supremehyo.awiki.MainActivity
 import com.supremehyo.awiki.R
 import com.supremehyo.awiki.databinding.FragmentEditBinding
 import com.supremehyo.awiki.repository.wiki.WikiContract
+import com.supremehyo.awiki.utils.EventBus
 import com.supremehyo.awiki.utils.MediaToolbarCameraButton
 import com.supremehyo.awiki.utils.MediaToolbarGalleryButton
 import com.supremehyo.awiki.viewmodel.EditFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_edit.*
 import kotlinx.android.synthetic.main.fragment_edit.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.wordpress.android.util.AppLog
 import org.wordpress.android.util.ImageUtils
 import org.wordpress.android.util.PermissionUtils
@@ -109,6 +121,9 @@ class EditFragment : Fragment() ,
     var editorContentParsedSHA256LastSwitch: ByteArray = ByteArray(0)
     var sourceContentParsedSHA256LastSwitch: ByteArray = ByteArray(0)
     var homeFragment = HomeFragment()
+    lateinit var edit_title : EditText
+    lateinit var edit_category : EditText
+    lateinit var edit_save : MotionButton
 
     private val isRunningTest: Boolean by lazy {
         try {
@@ -120,9 +135,12 @@ class EditFragment : Fragment() ,
     }
 
     private val viewModel: EditFragmentViewModel by activityViewModels() // hilt 로 editfragment viewmodel 주입
+    var ReadOrWrite : String = "write"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
 
         //글이 작성되었을때 리턴값을 받아와서 그때 toast 를 보내는 함수
         viewModel.wikiDTOInsertLiveData.observe(this , androidx.lifecycle.Observer {
@@ -132,6 +150,8 @@ class EditFragment : Fragment() ,
                 Toast.makeText(context, "오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
             }
         })
+
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -144,9 +164,14 @@ class EditFragment : Fragment() ,
             mHideActionBarOnSoftKeyboardUp = true
         }
 
+
+
         visualEditor = view.findViewById<AztecText>(R.id.et_editor)
         sourceEditor = view.findViewById<SourceViewEditText>(R.id.tv_preview)
         toolbar = view.findViewById<AztecToolbar>(R.id.formatting_toolbar)
+        edit_title = view.findViewById<EditText>(R.id.edit_title)
+        edit_category = view.findViewById<EditText>(R.id.edit_category)
+        edit_save = view.findViewById<MotionButton>(R.id.edit_save)
 
         val galleryButton = MediaToolbarGalleryButton(toolbar)
         galleryButton.setMediaToolbarButtonClickListener(object : IMediaToolbarButton.IMediaToolbarClickListener {
@@ -174,6 +199,23 @@ class EditFragment : Fragment() ,
             }
         })
 
+        //읽기 모드에서는 보이고 쓰기 모드에서는 안보여야한다.
+        edit_save.setOnClickListener {
+            activity?.runOnUiThread{
+                toolbar.visibility = View.VISIBLE
+                edit_emit.visibility = View.VISIBLE
+                edit_save.visibility = View.GONE
+
+                visualEditor.setFocusableInTouchMode(true)
+                visualEditor.setClickable(true)
+                visualEditor.setFocusable(true)
+
+
+            }
+        }
+
+
+        //TODO 처음 발행일때랑 수정하는거랑 구분하는게 필요함. 처음 발행일때는 insert 수정할때는 update 해야해서
         view.edit_emit.setOnClickListener {
             ////html으로 바로 변경
             val editorHtml = visualEditor!!.toPlainHtml(true)
@@ -214,6 +256,16 @@ class EditFragment : Fragment() ,
             .addPlugin(cameraButton)
 
         initHtmltoString("")
+
+
+        viewModel.clickWikiItem.observe(this , androidx.lifecycle.Observer {
+            if(it != null){
+                initHtmltoString(it.wikiDTO?.content.toString())
+                edit_title.setText(it.wikiDTO?.title.toString())
+                edit_category.setText(it.wikiDTO?.category.toString())
+                readOrwirteTypeCheck(it.readOrWrite)
+            }
+        })
 
         if (!isRunningTest) {
             aztec.visualEditor.enableCrashLogging(object : AztecExceptionHandler.ExceptionHandlerHelper {
@@ -274,6 +326,9 @@ class EditFragment : Fragment() ,
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
+
+
+
     }
 
     fun saveWiki(title : String , category : String , date : String , content : String , image: String , rawContent: String){
@@ -282,6 +337,42 @@ class EditFragment : Fragment() ,
     }
 
 
+    fun readOrwirteTypeCheck(rw : String){
+        when(rw){
+            "read" ->{
+                toolbar.visibility = View.GONE
+                edit_save.visibility = View.VISIBLE
+                edit_emit.visibility = View.GONE
+
+                edit_title.setClickable(false)
+                edit_title.setFocusable(false)
+                edit_category.setClickable(false)
+                edit_category.setFocusable(false)
+                visualEditor.setClickable(false)
+                visualEditor.setFocusable(false)
+
+            }
+            "write"->{
+                edit_title.setText("")
+                edit_category.setText("")
+                visualEditor.setText("")
+                toolbar.visibility = View.VISIBLE
+                edit_emit.visibility = View.VISIBLE
+                edit_save.visibility = View.GONE
+
+                visualEditor.setClickable(true)
+                visualEditor.setFocusable(true)
+            }
+
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        readOrwirteTypeCheck("write")
+        viewModel.clickHomeWikiListItemnull()
+        Log.v("퍼즈", "ㄴㅁㅇㄻㄴㅇㄻㄴ")
+    }
 
     //db에서 html 코드를 불러왔을때 그걸 위키 형식에 맞게 자동으로 변환해주는 함수
     //aztec 객체 설정뒤에 불러줘야 모든 값이 온전하게 출력된다.

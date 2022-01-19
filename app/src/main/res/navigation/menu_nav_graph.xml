@@ -6,21 +6,44 @@
     android:id="@+id/menu_nav_graph">
 
 
-    <fragment
+    <keep_state_fragment
         android:id="@+id/homeFragment"
         android:name="com.supremehyo.awiki.view.fragment.HomeFragment"
         android:label="CountryFragment"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_writeFragment"
-            app:destination="@id/writeFragment" />
-    </fragment>
+            app:destination="@id/writeFragment"
+            app:enterAnim="@anim/anim_slide_in_right"
+            app:exitAnim="@anim/anim_slide_out_left"
+            app:popEnterAnim="@anim/anim_slide_in_right"
+            app:popExitAnim="@anim/anim_slide_out_left" />
+        <argument
+            android:name="wikidto"
+            app:argType="com.supremehyo.awiki.repository.wiki.WikiContract">
+        </argument>
+        <argument
+            android:name="readorwrite"
+            app:argType="string">
+        </argument>
 
-    <fragment
+    </keep_state_fragment>
+
+    <keep_state_fragment
         android:id="@+id/writeFragment"
         android:name="com.supremehyo.awiki.view.fragment.EditFragment"
         android:label="CountryFragment"
         tools:layout="@layout/fragment_edit" >
-    </fragment>
+    </keep_state_fragment>
 
+    <keep_state_fragment
+        android:id="@+id/interestFragment"
+        android:name="com.supremehyo.awiki.view.fragment.InterestFragment"
+        android:label="interestFragment"
+        tools:layout="@layout/fragment_interest">
+    </keep_state_fragment>
+
+    <action android:id="@+id/action_global_writeFragment" app:destination="@id/writeFragment" />
+    <action android:id="@+id/action_global_homeFragment" app:destination="@id/homeFragment" />
+    <action android:id="@+id/action_global_interestFragment" app:destination="@id/interestFragment"/>
 </navigation>

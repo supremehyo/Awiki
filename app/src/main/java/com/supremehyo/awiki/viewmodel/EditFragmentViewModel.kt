@@ -5,10 +5,16 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.supremehyo.awiki.DTO.HometoEditDTO
 import com.supremehyo.awiki.base.BaseViewModel
 import com.supremehyo.awiki.model.WikiModelImple
 import com.supremehyo.awiki.repository.wiki.WikiContract
+import com.supremehyo.awiki.utils.EventBus
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,6 +37,10 @@ class EditFragmentViewModel @Inject constructor(private val model : WikiModelImp
     private  val _wikiDTOInsertLiveData = MutableLiveData<Long>()
     val wikiDTOInsertLiveData: LiveData<Long>
         get() = _wikiDTOInsertLiveData
+
+    private  val _clickWikiItem =  MutableLiveData<HometoEditDTO>()
+    val clickWikiItem: LiveData<HometoEditDTO>
+        get() = _clickWikiItem
 
     //wiki 저장하기
     fun insertWiki(dto : WikiContract , localOrApi : String ){
@@ -78,4 +88,14 @@ class EditFragmentViewModel @Inject constructor(private val model : WikiModelImp
     fun gonull(){
         _wikiDTOListLiveData.postValue(null)
     }
+    fun clickHomeWikiListItemnull(){
+        _clickWikiItem.postValue(null)
+    }
+
+    fun clickHomeWikiListItem(dto : HometoEditDTO){
+        viewModelScope.launch { // 코루틴 적용
+            _clickWikiItem.postValue(dto)
+        }
+    }
+
 }
