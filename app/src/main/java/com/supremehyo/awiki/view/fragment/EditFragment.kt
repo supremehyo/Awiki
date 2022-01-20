@@ -23,10 +23,7 @@ import android.text.InputType
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
-import android.widget.EditText
-import android.widget.PopupMenu
-import android.widget.Toast
-import android.widget.ToggleButton
+import android.widget.*
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.utils.widget.MotionButton
 import androidx.core.app.ActivityCompat
@@ -47,6 +44,7 @@ import com.supremehyo.awiki.repository.wiki.WikiContract
 import com.supremehyo.awiki.utils.EventBus
 import com.supremehyo.awiki.utils.MediaToolbarCameraButton
 import com.supremehyo.awiki.utils.MediaToolbarGalleryButton
+import com.supremehyo.awiki.utils.PdfUtil
 import com.supremehyo.awiki.viewmodel.EditFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_edit.*
@@ -97,6 +95,9 @@ class EditFragment : Fragment() ,
     PopupMenu.OnMenuItemClickListener,
     View.OnTouchListener {
 
+
+    lateinit var pdfUtil : PdfUtil
+
     private var mIsKeyboardOpen = false
     private var mHideActionBarOnSoftKeyboardUp = false
     private lateinit var binding: FragmentEditBinding
@@ -123,7 +124,10 @@ class EditFragment : Fragment() ,
     var homeFragment = HomeFragment()
     lateinit var edit_title : EditText
     lateinit var edit_category : EditText
-    lateinit var edit_save : MotionButton
+    lateinit var edit_save : LinearLayout
+    lateinit var like_bt : LinearLayout
+
+    var likeFlag : Boolean = false
 
     private val isRunningTest: Boolean by lazy {
         try {
@@ -171,7 +175,8 @@ class EditFragment : Fragment() ,
         toolbar = view.findViewById<AztecToolbar>(R.id.formatting_toolbar)
         edit_title = view.findViewById<EditText>(R.id.edit_title)
         edit_category = view.findViewById<EditText>(R.id.edit_category)
-        edit_save = view.findViewById<MotionButton>(R.id.edit_save)
+        edit_save = view.findViewById<LinearLayout>(R.id.edit_save)
+        like_bt = view.findViewById<LinearLayout>(R.id.like_bt)
 
         val galleryButton = MediaToolbarGalleryButton(toolbar)
         galleryButton.setMediaToolbarButtonClickListener(object : IMediaToolbarButton.IMediaToolbarClickListener {
@@ -211,6 +216,27 @@ class EditFragment : Fragment() ,
                 visualEditor.setFocusable(true)
 
 
+            }
+        }
+
+
+        //pdf 버튼 누르기
+        pdf_iv.setOnClickListener {
+            pdfUtil = PdfUtil(requireContext())
+            pdfUtil.layoutToImage(edit_root_rl) // pdf 다운로드
+        }
+
+
+        //좋아요 누르기
+        like_bt.setOnClickListener {
+            if(!likeFlag){
+                likeFlag = true
+                like_iv.setImageResource(R.drawable.ic_baseline_favorite_24)
+                Toast.makeText(context, "관심 목록에 추가됐습니다.", Toast.LENGTH_SHORT).show()
+            }else{
+                likeFlag = false
+                like_iv.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+                Toast.makeText(context, "관심 목록에서 해제됐습니다.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -343,6 +369,7 @@ class EditFragment : Fragment() ,
                 toolbar.visibility = View.GONE
                 edit_save.visibility = View.VISIBLE
                 edit_emit.visibility = View.GONE
+                like_bt.visibility = View.VISIBLE
 
                 edit_title.setClickable(false)
                 edit_title.setFocusable(false)
@@ -359,6 +386,7 @@ class EditFragment : Fragment() ,
                 toolbar.visibility = View.VISIBLE
                 edit_emit.visibility = View.VISIBLE
                 edit_save.visibility = View.GONE
+                like_bt.visibility = View.GONE
 
                 visualEditor.setClickable(true)
                 visualEditor.setFocusable(true)

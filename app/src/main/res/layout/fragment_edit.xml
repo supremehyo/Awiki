@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:id="@+id/edit_root_rl"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -20,56 +21,127 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:gravity="right"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginHorizontal="25dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <androidx.constraintlayout.utils.widget.MotionButton
-                        android:id="@+id/edit_save"
-                        android:visibility="gone"
+                    <LinearLayout
+                        android:id="@+id/pdf_bt"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_marginHorizontal="8dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:background="@color/white"
-                        android:elevation="10dp"
-                        android:text="편집"></androidx.constraintlayout.utils.widget.MotionButton>
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/pdf_iv"
+                            android:src="@drawable/ic_baseline_favorite_border_24"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                        </ImageView>
+                        <TextView
+                            android:text="pdf"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                        </TextView>
+                    </LinearLayout>
 
-                    <androidx.constraintlayout.utils.widget.MotionButton
-                        android:id="@+id/edit_emit"
+                    <LinearLayout
+                        android:id="@+id/like_bt"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:orientation="vertical"
+                        android:layout_marginHorizontal="8dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:background="@color/white"
-                        android:elevation="10dp"
-                        android:text="발행"></androidx.constraintlayout.utils.widget.MotionButton>
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/like_iv"
+                            android:src="@drawable/ic_baseline_favorite_border_24"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                        </ImageView>
+                        <TextView
+                            android:text="like"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/edit_save"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:src="@drawable/ic_baseline_mode_edit_outline_24"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                        </ImageView>
+                        <TextView
+                            android:text="edit"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/edit_emit"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:src="@drawable/ic_baseline_publish_24"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                        </ImageView>
+                        <TextView
+                            android:text="publish"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                        </TextView>
+                    </LinearLayout>
                 </LinearLayout>
 
 
                 <EditText
                     android:id="@+id/edit_title"
                     android:fontFamily="@font/nanumbarungothiclight"
-                    android:paddingVertical="4dp"
-                    android:layout_marginVertical="4dp"
+                    android:layout_marginTop="12dp"
+                    android:paddingVertical="6dp"
+                    android:paddingHorizontal="20dp"
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
                     android:hint="제목"
-                    android:textSize="14dp"></EditText>
+                    android:textSize="12dp"></EditText>
 
                 <EditText
                     android:id="@+id/edit_category"
-                    android:paddingVertical="4dp"
-                    android:layout_marginVertical="4dp"
+                    android:paddingVertical="6dp"
+                    android:paddingHorizontal="20dp"
                     android:fontFamily="@font/nanumbarungothiclight"
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
                     android:hint="카테고리"
-                    android:textSize="14dp"></EditText>
+                    android:textSize="12dp"></EditText>
 
 
                 <org.wordpress.aztec.AztecText
@@ -80,7 +152,7 @@
                     android:gravity="top|start"
                     android:hint="@string/hint_input_text"
                     android:minLines="5"
-                    android:padding="16dp"
+                    android:padding="20dp"
                     android:textSize="14dp"
                     app:backgroundColor="@android:color/white"
                     app:quoteBackground="@android:color/white"
@@ -119,7 +191,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:backgroundTint="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:toolbarIconHighlightColor="@color/white"/>
 
     <!--
        <com.google.android.material.bottomappbar.BottomAppBar

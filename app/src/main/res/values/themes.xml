@@ -4,7 +4,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/purple_500</item>
-        <item name="colorAccent">@color/purple_700</item>
+        <item name="colorAccent">#FF5757</item>
         <item name="android:windowActivityTransitions">true</item>
     </style>
 
@@ -23,13 +23,13 @@
     </style>
 
     <style name="EditTextGreyStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"> // important : parent 를 이것으로.
-        <item name="colorControlNormal">@color/colorBoulder</item>  // unFocus 상태일때 밑줄 색.
-        <item name="boxStrokeColor">#FF5757</item> // Focus 상태일때 밑줄 색.
-        <item name="android:textCursorDrawable">@color/colorPrimary</item>  // cursor 색.
-        <item name="android:textColorHint">@color/colorBoulder</item>  // hint 색
-        <item name="hintTextColor">#FF5757</item>   // floating hint 색
-        <item name="helperTextTextColor">@color/colorPrimary</item>
-        <item name="errorTextColor">@color/colorPrimary</item>
+        <item name="colorControlNormal">@color/colorAccent</item>  // unFocus 상태일때 밑줄 색.
+        <item name="boxStrokeColor">@color/colorAccent</item> // Focus 상태일때 밑줄 색.
+        <item name="android:textCursorDrawable">@color/colorAccent</item>  // cursor 색.
+        <item name="android:textColorHint">@color/colorAccent</item>  // hint 색
+        <item name="hintTextColor">@color/colorAccent</item>   // floating hint 색
+        <item name="helperTextTextColor">@color/colorAccent</item>
+        <item name="errorTextColor">@color/colorAccent</item>
 
     </style>
 

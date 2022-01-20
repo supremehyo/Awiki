@@ -42,6 +42,13 @@ android {
     viewBinding {
         enabled = true
     }
+    sourceSets {
+        main {
+            assets {
+                srcDirs 'src\\main\\assets'
+            }
+        }
+    }
 }
 
 dependencies {
@@ -78,6 +85,11 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
 
+    //pdf 라이브러리
+    implementation 'com.itextpdf:itextpdf:5.5.13.2'
+
+    //로티 애니메이션
+    implementation 'com.airbnb.android:lottie:4.2.1'
 
     //저장소 관련--
     def room_version = "2.2.5"

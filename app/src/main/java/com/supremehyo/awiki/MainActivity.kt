@@ -2,17 +2,22 @@ package com.supremehyo.awiki
 
 import android.annotation.SuppressLint
 import android.graphics.Rect
+import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.navigation.plusAssign
 import com.google.android.material.navigation.NavigationView
 import com.supremehyo.awiki.navigation.KeepStateNavigator
+import com.supremehyo.awiki.utils.PdfUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -21,10 +26,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    private var backKeyPressedTime: Long = 0
+    lateinit var toast : Toast
     @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         navigationView.setNavigationItemSelectedListener(object : NavigationView.OnNavigationItemSelectedListener{
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -55,14 +63,19 @@ class MainActivity : AppCompatActivity() {
                         return true
                     }
                 }
-                return false;
+                return false
             }
         })
-        //로고 클릭시 홈으로 이동
-        awiki_logo.setOnClickListener {
-            findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_homeFragment)
-        }
 
+
+
+        menu_open_iv.setOnClickListener {
+            if(!drawer_layout.isOpen){
+                drawer_layout.openDrawer(Gravity.LEFT)
+            }else{
+                drawer_layout.closeDrawers()
+            }
+        }
 
         val navController = findNavController(R.id.nav_host_fragment)
 
@@ -74,14 +87,7 @@ class MainActivity : AppCompatActivity() {
         navController.navigatorProvider += navigator
         navController.setGraph(R.navigation.menu_nav_graph)
     }
-
-    /*
-    fun replaceFragment(fragment: Fragment){
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        drawer_layout.closeDrawers()
-        fragmentTransaction.replace(R.id.main_nav_host,fragment)
-        fragmentTransaction.commit()
-    }*/
+    
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         val focusView: View? = currentFocus
@@ -98,5 +104,26 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.dispatchTouchEvent(ev)
+    }
+
+    override fun onBackPressed() {
+        // 기존 뒤로가기 버튼의 기능을 막기위해 주석처리 또는 삭제
+        // super.onBackPressed();
+        // 마지막으로 뒤로가기 버튼을 눌렀던 시간에 2초를 더해 현재시간과 비교 후
+        // 마지막으로 뒤로가기 버튼을 눌렀던 시간이 2초가 지났으면 Toast Show
+        // 2000 milliseconds = 2 seconds
+        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+            backKeyPressedTime = System.currentTimeMillis()
+            toast = Toast.makeText(this, "\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
+            toast.show()
+            return
+        }
+        // 마지막으로 뒤로가기 버튼을 눌렀던 시간에 2초를 더해 현재시간과 비교 후
+        // 마지막으로 뒤로가기 버튼을 눌렀던 시간이 2초가 지나지 않았으면 종료
+        // 현재 표시된 Toast 취소
+        if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+            finish()
+            toast.cancel()
+        }
     }
 }

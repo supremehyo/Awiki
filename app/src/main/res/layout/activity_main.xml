@@ -16,30 +16,58 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:elevation="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
-            <ImageView
-                android:id="@+id/awiki_logo"
-                android:layout_gravity="center"
-                android:src="@drawable/awike_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </ImageView>
-        </com.google.android.material.appbar.AppBarLayout>
+            android:layout_height="65dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+
+                <Button
+                    android:id="@+id/sdfsdfs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/black"
+                    android:text="asdfasdf"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></Button>
+                <ImageView
+                    android:id="@+id/menu_open_iv"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_baseline_menu_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.929"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_below="@+id/cl"
+                android:background="@color/colorAccent"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="1dp"
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp">
+            </View>
+
+        </RelativeLayout>
+
+
+
 
         <fragment
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="65dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:defaultNavHost="true"
@@ -55,7 +83,7 @@
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
         app:menu="@menu/menu_tab_bar"
-        android:background="@color/icon_color"
+        android:background="@color/colorAccent"
         android:layout_gravity="start"
         android:layout_width="wrap_content"
         android:layout_height="match_parent">

@@ -71,8 +71,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
             initAdapter()
             isLoading =false
 
-
-
             if(search_et.text.toString().isEmpty()) {
                 viewModel.gonull()
                 linearLayout.visibility = View.VISIBLE
