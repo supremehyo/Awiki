@@ -42,6 +42,10 @@ class EditFragmentViewModel @Inject constructor(private val model : WikiModelImp
     val clickWikiItem: LiveData<HometoEditDTO>
         get() = _clickWikiItem
 
+    private val _editStateLiveData = MutableLiveData<String>()
+    val editStateLiveData: LiveData<String>
+        get() = _editStateLiveData
+
     //wiki 저장하기
     fun insertWiki(dto : WikiContract , localOrApi : String ){
         Log.v("sfdsdf333" , dto.content)
@@ -50,6 +54,12 @@ class EditFragmentViewModel @Inject constructor(private val model : WikiModelImp
             Log.v("awgewgg2" , dto.content)
             temp = model.insertWiki(dto ,localOrApi)
             _wikiDTOInsertLiveData.postValue(temp)
+        }
+    }
+
+    fun setState(state : String){
+        viewModelScope.launch {
+            _editStateLiveData.postValue(state)
         }
     }
 

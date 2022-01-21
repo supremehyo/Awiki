@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:windowFullscreen">true</item>
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/purple_500</item>
         <item name="colorAccent">#FF5757</item>
@@ -22,9 +23,9 @@
         <item name="rippleColor">#CCCCCC</item>
     </style>
 
-    <style name="EditTextGreyStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"> // important : parent 를 이것으로.
+    <style name="EditTextGreyStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox"> // important : parent 를 이것으로.
         <item name="colorControlNormal">@color/colorAccent</item>  // unFocus 상태일때 밑줄 색.
-        <item name="boxStrokeColor">@color/colorAccent</item> // Focus 상태일때 밑줄 색.
+        <item name="boxStrokeColor">@color/text_input_box_stroke</item> // Focus 상태일때 밑줄 색.
         <item name="android:textCursorDrawable">@color/colorAccent</item>  // cursor 색.
         <item name="android:textColorHint">@color/colorAccent</item>  // hint 색
         <item name="hintTextColor">@color/colorAccent</item>   // floating hint 색

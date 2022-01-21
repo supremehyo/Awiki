@@ -126,6 +126,8 @@ class EditFragment : Fragment() ,
     lateinit var edit_category : EditText
     lateinit var edit_save : LinearLayout
     lateinit var like_bt : LinearLayout
+    lateinit var pdf_iv : ImageView
+    lateinit var  edit_scroll :ScrollView
 
     var likeFlag : Boolean = false
 
@@ -145,7 +147,6 @@ class EditFragment : Fragment() ,
         super.onCreate(savedInstanceState)
 
 
-
         //글이 작성되었을때 리턴값을 받아와서 그때 toast 를 보내는 함수
         viewModel.wikiDTOInsertLiveData.observe(this , androidx.lifecycle.Observer {
             if(it != 0L){
@@ -155,20 +156,20 @@ class EditFragment : Fragment() ,
             }
         })
 
-
+        viewModel.editStateLiveData.observe(this, androidx.lifecycle.Observer {
+            readOrwirteTypeCheck(it)
+        })
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentEditBinding.inflate(layoutInflater)
         val view = binding.root
 
-        getActivity()?.getWindow()?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
             && !resources.getBoolean(R.bool.is_large_tablet_landscape)) {
             mHideActionBarOnSoftKeyboardUp = true
         }
-
-
 
         visualEditor = view.findViewById<AztecText>(R.id.et_editor)
         sourceEditor = view.findViewById<SourceViewEditText>(R.id.tv_preview)
@@ -177,6 +178,8 @@ class EditFragment : Fragment() ,
         edit_category = view.findViewById<EditText>(R.id.edit_category)
         edit_save = view.findViewById<LinearLayout>(R.id.edit_save)
         like_bt = view.findViewById<LinearLayout>(R.id.like_bt)
+        pdf_iv = view.findViewById(R.id.pdf_iv)
+        edit_scroll = view.findViewById(R.id.edit_scroll)
 
         val galleryButton = MediaToolbarGalleryButton(toolbar)
         galleryButton.setMediaToolbarButtonClickListener(object : IMediaToolbarButton.IMediaToolbarClickListener {
@@ -206,24 +209,14 @@ class EditFragment : Fragment() ,
 
         //읽기 모드에서는 보이고 쓰기 모드에서는 안보여야한다.
         edit_save.setOnClickListener {
-            activity?.runOnUiThread{
-                toolbar.visibility = View.VISIBLE
-                edit_emit.visibility = View.VISIBLE
-                edit_save.visibility = View.GONE
-
-                visualEditor.setFocusableInTouchMode(true)
-                visualEditor.setClickable(true)
-                visualEditor.setFocusable(true)
-
-
-            }
+            readOrwirteTypeCheck("edit")
         }
 
 
         //pdf 버튼 누르기
         pdf_iv.setOnClickListener {
             pdfUtil = PdfUtil(requireContext())
-            pdfUtil.layoutToImage(edit_root_rl) // pdf 다운로드
+            pdfUtil.layoutToImage(edit_scroll) // pdf 다운로드
         }
 
 
@@ -289,7 +282,8 @@ class EditFragment : Fragment() ,
                 initHtmltoString(it.wikiDTO?.content.toString())
                 edit_title.setText(it.wikiDTO?.title.toString())
                 edit_category.setText(it.wikiDTO?.category.toString())
-                readOrwirteTypeCheck(it.readOrWrite)
+                viewModel.setState(it.readOrWrite)
+                //readOrwirteTypeCheck()
             }
         })
 
@@ -388,18 +382,32 @@ class EditFragment : Fragment() ,
                 edit_save.visibility = View.GONE
                 like_bt.visibility = View.GONE
 
+                edit_title.setFocusableInTouchMode(true)
+                edit_title.setClickable(true)
+                edit_title.setFocusable(true)
+
+                edit_category.setFocusableInTouchMode(true)
+                edit_category.setClickable(true)
+                edit_category.setFocusable(true)
+
+                visualEditor.setFocusableInTouchMode(true)
                 visualEditor.setClickable(true)
                 visualEditor.setFocusable(true)
             }
+            "edit"->{
+                toolbar.visibility = View.VISIBLE
+                edit_emit.visibility = View.VISIBLE
+                edit_save.visibility = View.GONE
 
+                visualEditor.setFocusableInTouchMode(true)
+                visualEditor.setClickable(true)
+                visualEditor.setFocusable(true)
+            }
         }
     }
 
     override fun onPause() {
         super.onPause()
-        readOrwirteTypeCheck("write")
-        viewModel.clickHomeWikiListItemnull()
-        Log.v("퍼즈", "ㄴㅁㅇㄻㄴㅇㄻㄴ")
     }
 
     //db에서 html 코드를 불러왔을때 그걸 위키 형식에 맞게 자동으로 변환해주는 함수
@@ -555,14 +563,13 @@ class EditFragment : Fragment() ,
                     val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                     startActivity(browserIntent)
                 } catch (e: ActivityNotFoundException) {
-             //       ToastUtils.showToast(this, "Audio tapped!")
+
                 }
             }
         }
     }
 
     override fun onImageTapped(attrs: AztecAttributes, naturalWidth: Int, naturalHeight: Int) {
-      //  ToastUtils.showToast(this, "Image tapped!")
     }
 
     override fun onImeBack() {
@@ -572,21 +579,10 @@ class EditFragment : Fragment() ,
 
     override fun onMediaDeleted(attrs: AztecAttributes) {
         val url = attrs.getValue("src")
-     //   ToastUtils.showToast(this, "Media Deleted! " + url)
     }
 
     override fun onVideoInfoRequested(attrs: AztecAttributes) {
         if (attrs.hasAttribute(ATTRIBUTE_VIDEOPRESS_HIDDEN_ID)) {
-          //  AppLog.d(AppLog.T.EDITOR, "Video Info Requested for shortcode " + attrs.getValue(
-               // ATTRIBUTE_VIDEOPRESS_HIDDEN_ID
-          //  ))
-
-
-            /*
-            Here should go the Network request that retrieves additional info about the video.
-            See: https://developer.wordpress.com/docs/api/1.1/get/videos/%24guid/
-            The response has all info in it. We're skipping it here, and set the poster image directly
-            */
             aztec.visualEditor.postDelayed({
                 aztec.visualEditor.updateVideoPressThumb(
                     "https://videos.files.wordpress.com/OcobLTqC/img_5786_hd.original.jpg",
@@ -619,6 +615,8 @@ class EditFragment : Fragment() ,
             }
         }
     }
+
+
 
     override fun onRedo() {
     }
@@ -752,7 +750,6 @@ class EditFragment : Fragment() ,
                 startActivityForResult(intent, REQUEST_MEDIA_PHOTO)
             } catch (exception: ActivityNotFoundException) {
                 AppLog.e(AppLog.T.EDITOR, exception.message)
-             //   ToastUtils.showToast(this, getString(R.string.error_chooser_photo), ToastUtils.Duration.LONG)
             }
         }
     }
@@ -772,7 +769,6 @@ class EditFragment : Fragment() ,
                 startActivityForResult(intent, REQUEST_MEDIA_VIDEO)
             } catch (exception: ActivityNotFoundException) {
                 AppLog.e(AppLog.T.EDITOR, exception.message)
-            //    ToastUtils.showToast(this, getString(R.string.error_chooser_video), ToastUtils.Duration.LONG)
             }
         }
     }
@@ -799,7 +795,6 @@ class EditFragment : Fragment() ,
                 }
 
                 if (isPermissionDenied) {
-                  //  ToastUtils.showToast(this, getString(R.string.permission_required_media_camera))
                 } else {
                     when (requestCode) {
                         MEDIA_CAMERA_PHOTO_PERMISSION_REQUEST_CODE -> {
@@ -828,14 +823,12 @@ class EditFragment : Fragment() ,
                 when (requestCode) {
                     MEDIA_PHOTOS_PERMISSION_REQUEST_CODE -> {
                         if (isPermissionDenied) {
-                         //   ToastUtils.showToast(this, getString(R.string.permission_required_media_photos))
                         } else {
                             onPhotosMediaOptionSelected()
                         }
                     }
                     MEDIA_VIDEOS_PERMISSION_REQUEST_CODE -> {
                         if (isPermissionDenied) {
-                        //    ToastUtils.showToast(this, getString(R.string.permission_required_media_videos))
                         } else {
                             onVideosMediaOptionSelected()
                         }

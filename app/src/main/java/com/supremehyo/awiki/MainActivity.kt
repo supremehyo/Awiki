@@ -3,6 +3,7 @@ package com.supremehyo.awiki
 import android.annotation.SuppressLint
 import android.graphics.Rect
 import android.graphics.drawable.AnimationDrawable
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
@@ -12,12 +13,15 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.plusAssign
 import com.google.android.material.navigation.NavigationView
 import com.supremehyo.awiki.navigation.KeepStateNavigator
 import com.supremehyo.awiki.utils.PdfUtil
+import com.supremehyo.awiki.viewmodel.EditFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -28,11 +32,24 @@ class MainActivity : AppCompatActivity() {
 
     private var backKeyPressedTime: Long = 0
     lateinit var toast : Toast
+    private val viewModel: EditFragmentViewModel by viewModels()
+    private var decorView: View? = null
+    private var uiOption = 0
     @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        decorView = window.decorView
+        uiOption = window.decorView.systemUiVisibility
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) uiOption =
+            uiOption or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) uiOption =
+            uiOption or View.SYSTEM_UI_FLAG_FULLSCREEN
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) uiOption =
+            uiOption or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+
+        decorView!!.setSystemUiVisibility(uiOption)
 
         navigationView.setNavigationItemSelectedListener(object : NavigationView.OnNavigationItemSelectedListener{
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -45,12 +62,11 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.writeFragment ->{
                         item.isCheckable = true
-                        var bundle = bundleOf("readorwrite" to "write")
-                        findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_writeFragment , bundle)
+                        findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_writeFragment)
+                        viewModel.setState("write")
                         drawer_layout.closeDrawers()
                         return true
                     }
-
                     R.id.mywikiFragment ->{
                         item.isCheckable = true
                         drawer_layout.closeDrawers()
@@ -105,6 +121,8 @@ class MainActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(ev)
     }
+
+
 
     override fun onBackPressed() {
         // 기존 뒤로가기 버튼의 기능을 막기위해 주석처리 또는 삭제

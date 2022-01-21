@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:id="@+id/drawer_layout"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
@@ -26,16 +27,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp">
 
-                <Button
+                <TextView
                     android:id="@+id/sdfsdfs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/black"
-                    android:text="asdfasdf"
-                    android:textColor="@color/black"
+                    android:fontFamily="@font/nanumbarungothicbold"
+                    android:text="AWIKI"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="17dp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.084"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"></Button>
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.6"></TextView>
+
                 <ImageView
                     android:id="@+id/menu_open_iv"
                     android:layout_width="28dp"
