@@ -200,7 +200,7 @@
         android:layout_alignParentBottom="true"
         android:backgroundTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:toolbarIconHighlightColor="@color/white"/>
+        app:toolbarIconHighlightColor="@color/white" />
 
     <!--
        <com.google.android.material.bottomappbar.BottomAppBar

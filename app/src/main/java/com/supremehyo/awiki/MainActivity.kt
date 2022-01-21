@@ -83,6 +83,11 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        //왼쪽 상단 awiki 눌렀을때 동작
+        wiki_logo.setOnClickListener {
+            findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_homeFragment)
+            drawer_layout.closeDrawers()
+        }
 
 
         menu_open_iv.setOnClickListener {
