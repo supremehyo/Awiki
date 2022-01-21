@@ -57,8 +57,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
         viewModel.wikiDTOLiveData.observe(this , Observer {
             if (it != null) {
                 Log.v("ssssss" , it.title)
-               // wiki_title.text = it.title
-               // wiki_subcontent.text = it.content
             }
         })
 
@@ -74,7 +72,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
             if(search_et.text.toString().isEmpty()) {
                 viewModel.gonull()
                 linearLayout.visibility = View.VISIBLE
-              //  imageView.visibility = View.VISIBLE
             }
 
             if(it!= null){
@@ -82,12 +79,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
                 dtoList= listToArrayList(it)
                 if(dtoList.size > 5){
                     for (i in 0 until 5){// 5보다 크면 5개까지만 끊어서 넣어줘라
-                     //   imageView.visibility = View.GONE
                         items.add(dtoList[i])
                     }
                 }else{
                     dtoList.forEach {//그보다 적으면 그냥 다 집어넣으면 된다.
-                      //  imageView.visibility = View.GONE
                         items.add(it)
                     }
                 }
@@ -98,7 +93,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
     override fun initAfterBinding() {
         search_et.addTextChangedListener(object : TextWatcher{
             private var timer = Timer()
-            private val DELAY: Long = 1000 // milliseconds
+            private val DELAY: Long = 1000
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 

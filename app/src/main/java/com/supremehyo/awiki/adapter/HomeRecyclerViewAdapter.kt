@@ -5,7 +5,10 @@ import android.app.ActivityOptions
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.ActivityNavigatorExtras
@@ -39,6 +42,7 @@ class HomeRecyclerViewAdapter(activity : Activity ,items: List<WikiContract?>? ,
     private var unFilteredList = items
     private var filteredList = items
     private var aactivity = activity
+
     override fun getItemCount(): Int {
         return if (filteredList == null){
             0
@@ -76,11 +80,22 @@ class HomeRecyclerViewAdapter(activity : Activity ,items: List<WikiContract?>? ,
             val item = filteredList?.get(position)
             val itemHolder = holder as ItemViewHolder
             itemHolder.bind(item!!)
+            
+            
             holder.itemView.wiki_item_cl.setOnClickListener {
                 var temp = HometoEditDTO(item, "read")
                 model.clickHomeWikiListItem(temp)
                 findNavController(holder.itemView).navigate(R.id.action_homeFragment_to_writeFragment)
             }
+            
+            //리스트 확장버튼 클릭시
+            holder.itemView.expand_list_item.setOnClickListener {
+                expandOpen(holder.itemView.expand_ll , holder.itemView.expand_list_item)
+            }
+            holder.itemView.expand_list_item_close.setOnClickListener {
+                expandClose(holder.itemView.expand_ll)
+            }
+
         }else if (holder is LoadingViewHolder){
 
         }
@@ -93,5 +108,18 @@ class HomeRecyclerViewAdapter(activity : Activity ,items: List<WikiContract?>? ,
             binding.wikiTitle.text = item.title
             binding.rawContent.text = item.rawContent
         }
+    }
+    
+    //확장 오픈
+    fun expandOpen(constraintLayout: ConstraintLayout ,imageView: ImageView){
+        imageView.visibility = View.GONE
+        constraintLayout.visibility = View.VISIBLE
+
+    }
+
+    //확장 닫기
+    fun expandClose(constraintLayout: ConstraintLayout){
+        constraintLayout.visibility = View.GONE
+
     }
 }
