@@ -17,6 +17,7 @@ import com.supremehyo.awiki.base.BaseFragment
 import com.supremehyo.awiki.databinding.FragmentHomeBinding
 import com.supremehyo.awiki.repository.wiki.WikiContract
 import com.supremehyo.awiki.viewmodel.EditFragmentViewModel
+import com.supremehyo.awiki.viewmodel.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.CoroutineScope
@@ -33,7 +34,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
     override val layoutResourceId: Int
         get() = R.layout.fragment_home
     private val viewModel: EditFragmentViewModel by activityViewModels() // hilt 로 editfragment viewmodel 주입
-
+    private val viewmodel2 : HomeFragmentViewModel by activityViewModels()
 
     private val mHandler: Handler = Handler()
     var title : String = ""
@@ -50,8 +51,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
         //viewModel.getWiki("title1" , requireContext() , "local")
         initAdapter()
         initScrollListener()
+        var wikiContract = WikiContract(1L,"데이트","타이틀임","카테고리임","컨텐츠임","이미징ㅇ","로우")
+        viewmodel2.posttest(wikiContract)
     }
     override fun initDataBinding() {
+
+        viewmodel2.LiveData.observe(this , Observer {
+
+        })
+
 
         //나중에 여기 랜덤으로 뽑아와서 5개 리스트로 나열하면 될듯
         viewModel.wikiDTOLiveData.observe(this , Observer {

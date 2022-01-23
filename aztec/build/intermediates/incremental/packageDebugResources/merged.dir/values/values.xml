@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <bool name="comments_visible">true</bool>
+    <bool name="history_enable">true</bool>
+    <bool name="link_underline">true</bool>
+    <color name="almost_black">#ff11181D</color>
+    <color name="background">@color/white</color>
+    <color name="background_key">@color/grey_c_30</color>
+    <color name="blue_dark">#005082</color>
+    <color name="blue_light">#78dcfa</color>
+    <color name="blue_medium">#ff00aadc</color>
+    <color name="blue_wordpress">#ff0087be</color>
+    <color name="bullet">@color/text</color>
+    <color name="code">@color/white</color>
+    <color name="code_background">@color/grey_darken_10</color>
+    <color name="format_bar_background">@color/grey_light</color>
+    <color name="format_bar_button">@color/grey</color>
+    <color name="format_bar_button_disabled">@color/grey_lighten_30</color>
+    <color name="format_bar_button_highlighted">@color/almost_black</color>
+    <color name="format_bar_divider_horizontal">@color/grey_lighten_10</color>
+    <color name="format_bar_divider_vertical">@color/grey_lighten_20</color>
+    <color name="format_bar_ripple_animation">@color/grey_lighten_10</color>
+    <color name="grey">#ff87a6bc</color>
+    <color name="grey_8_40">#66888888</color>
+    <color name="grey_a_40">#66aaaaaa</color>
+    <color name="grey_b">#ffbbbbbb</color>
+    <color name="grey_c">#ffcccccc</color>
+    <color name="grey_c_30">#4dcccccc</color>
+    <color name="grey_dark">#ff2e4453</color>
+    <color name="grey_darken_10">#668eaa</color>
+    <color name="grey_darken_20">#ff4f748e</color>
+    <color name="grey_darken_30">#ff3d596d</color>
+    <color name="grey_disabled">#ff668eaa</color>
+    <color name="grey_e">#ffeeeeee</color>
+    <color name="grey_light">#fff3f6f8</color>
+    <color name="grey_lighten_10">#ffa8bece</color>
+    <color name="grey_lighten_20">#ffc8d7e1</color>
+    <color name="grey_lighten_30">#ffe9eff3</color>
+    <color name="html_attribute">@color/grey</color>
+    <color name="html_tag">@color/blue_wordpress</color>
+    <color name="image_options_label">@color/grey</color>
+    <color name="legacy_format_bar_background">@color/grey_e</color>
+    <color name="legacy_format_bar_button_selected">@color/blue_medium</color>
+    <color name="legacy_placeholder_content_text">#ff21759b</color>
+    <color name="legacy_pressed_wordpress">#cc78c8e6</color>
+    <color name="link">@color/blue_wordpress</color>
+    <color name="quote">@color/background</color>
+    <color name="quote_background">@color/grey_lighten_30</color>
+    <color name="sourceview_placeholder_text">@color/grey</color>
+    <color name="sourceview_separator">@color/grey_lighten_30</color>
+    <color name="text">@color/grey_dark</color>
+    <color name="text_hint">@color/grey_disabled</color>
+    <color name="white">#ffffffff</color>
+    <dimen name="aztec_format_bar_end_margin">5dp</dimen>
+    <dimen name="aztec_format_bar_height">48dp</dimen>
+    <dimen name="aztec_format_bar_start_margin">5dp</dimen>
+    <dimen name="block_vertical_padding">8dp</dimen>
+    <dimen name="bullet_margin">16dp</dimen>
+    <dimen name="bullet_padding">8dp</dimen>
+    <dimen name="bullet_width">2dp</dimen>
+    <dimen name="format_bar_horizontal_divider_height">1dp</dimen>
+    <dimen name="format_bar_vertical_divider_height">28dp</dimen>
+    <dimen name="format_bar_vertical_divider_width">0.6dp</dimen>
+    <dimen name="heading_vertical_padding">8dp</dimen>
+    <dimen name="height_header">48dp</dimen>
+    <dimen name="height_key">32dp</dimen>
+    <dimen name="link_dialog_margin_inner">4dp</dimen>
+    <dimen name="link_dialog_margin_outer">16dp</dimen>
+    <dimen name="margin_dialog">24dp</dimen>
+    <dimen name="margin_extra_large">16dp</dimen>
+    <dimen name="margin_extra_small">2dp</dimen>
+    <dimen name="margin_key">8dp</dimen>
+    <dimen name="margin_large">12dp</dimen>
+    <dimen name="margin_medium">8dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="padding_key">8dp</dimen>
+    <dimen name="quote_margin">16dp</dimen>
+    <dimen name="quote_padding">8dp</dimen>
+    <dimen name="quote_width">2dp</dimen>
+    <dimen name="radius_corner">2dp</dimen>
+    <dimen name="spacing_extra">0dp</dimen>
+    <item format="string" name="spacing_multiplier" type="dimen">1.0</item>
+    <dimen name="text_dialog">14sp</dimen>
+    <dimen name="text_header">14sp</dimen>
+    <dimen name="text_item">16sp</dimen>
+    <dimen name="text_key">14sp</dimen>
+    <dimen name="width_key">28dp</dimen>
+    <integer name="history_size">100</integer>
+    <string name="accessibility_action_click_label">activate</string>
+    <string name="block_editor_dialog_button_cancel">Cancel</string>
+    <string name="block_editor_dialog_button_save">Save</string>
+    <string name="create_a_link">Create a link</string>
+    <string name="cursor_moved">Cursor moved</string>
+    <string name="error_chooser_photo">No app was found to choose a photo</string>
+    <string name="error_chooser_video">No app was found to choose a video</string>
+    <string name="format_bar_description_align_center">Align Center</string>
+    <string name="format_bar_description_align_left">Align Left</string>
+    <string name="format_bar_description_align_right">Align Right</string>
+    <string name="format_bar_description_bold">Bold</string>
+    <string name="format_bar_description_ellipsis_collapse">Collapse Toolbar</string>
+    <string name="format_bar_description_ellipsis_expand">Expand Toolbar</string>
+    <string name="format_bar_description_heading">Heading</string>
+    <string name="format_bar_description_horizontal_rule">Horizontal Rule</string>
+    <string name="format_bar_description_html">HTML</string>
+    <string name="format_bar_description_italic">Italic</string>
+    <string name="format_bar_description_link">Link</string>
+    <string name="format_bar_description_list">List</string>
+    <string name="format_bar_description_media_expanded">Hide Media Options</string>
+    <string name="format_bar_description_media_normal">Show Media Options</string>
+    <string name="format_bar_description_quote">Block quote</string>
+    <string name="format_bar_description_strike">Strikethrough</string>
+    <string name="format_bar_description_underline">Underline</string>
+    <string name="header_edit">Edit</string>
+    <string name="header_format">Format</string>
+    <string name="header_insert">Insert</string>
+    <string name="heading_1">Heading 1</string>
+    <string name="heading_2">Heading 2</string>
+    <string name="heading_3">Heading 3</string>
+    <string name="heading_4">Heading 4</string>
+    <string name="heading_5">Heading 5</string>
+    <string name="heading_6">Heading 6</string>
+    <string name="heading_default">Default</string>
+    <string name="image_thumbnail">Image thumbnail</string>
+    <string name="item_edit_all">Select All</string>
+    <string name="item_edit_copy">Copy</string>
+    <string name="item_edit_cut">Cut</string>
+    <string name="item_edit_paste">Paste</string>
+    <string name="item_edit_redo">Redo</string>
+    <string name="item_edit_undo">Undo</string>
+    <string name="item_format_bold">Bold</string>
+    <string name="item_format_code">Code</string>
+    <string name="item_format_heading_1">Heading 1</string>
+    <string name="item_format_heading_2">Heading 2</string>
+    <string name="item_format_heading_3">Heading 3</string>
+    <string name="item_format_heading_4">Heading 4</string>
+    <string name="item_format_heading_5">Heading 5</string>
+    <string name="item_format_heading_6">Heading 6</string>
+    <string name="item_format_italic">Italic</string>
+    <string name="item_format_list_no">No List</string>
+    <string name="item_format_list_ordered">Ordered List</string>
+    <string name="item_format_list_unordered">Unordered List</string>
+    <string name="item_format_paragraph">Paragraph</string>
+    <string name="item_format_preformatted">Preformatted</string>
+    <string name="item_format_quote">Quote</string>
+    <string name="item_format_strike">Strikethrough</string>
+    <string name="item_format_underline">Underline</string>
+    <string name="item_insert_link">Link</string>
+    <string name="item_insert_media">Media</string>
+    <string name="item_insert_more">Read More</string>
+    <string name="item_insert_page">Page Break</string>
+    <string name="key_multiple_alt">Alt</string>
+    <string name="key_multiple_ctrl">Ctrl</string>
+    <string name="key_single_1">1</string>
+    <string name="key_single_2">2</string>
+    <string name="key_single_3">3</string>
+    <string name="key_single_4">4</string>
+    <string name="key_single_5">5</string>
+    <string name="key_single_6">6</string>
+    <string name="key_single_7">7</string>
+    <string name="key_single_8">8</string>
+    <string name="key_single_a">A</string>
+    <string name="key_single_b">B</string>
+    <string name="key_single_c">C</string>
+    <string name="key_single_d">D</string>
+    <string name="key_single_i">I</string>
+    <string name="key_single_k">K</string>
+    <string name="key_single_l">L</string>
+    <string name="key_single_m">M</string>
+    <string name="key_single_o">O</string>
+    <string name="key_single_p">P</string>
+    <string name="key_single_q">Q</string>
+    <string name="key_single_t">T</string>
+    <string name="key_single_u">U</string>
+    <string name="key_single_v">V</string>
+    <string name="key_single_x">X</string>
+    <string name="key_single_y">Y</string>
+    <string name="key_single_z">Z</string>
+    <string name="link_dialog_button_cancel">Cancel</string>
+    <string name="link_dialog_button_ok">OK</string>
+    <string name="link_dialog_button_remove_link">Remove Link</string>
+    <string name="link_dialog_edit_hint">http(s)://</string>
+    <string name="link_dialog_title">Insert link</string>
+    <string name="link_enter_url">URL</string>
+    <string name="link_enter_url_text">Link text (optional)</string>
+    <string name="link_open_new_window">Open link in a new window/tab</string>
+    <string name="media_bar_description_camera">Take Photo or Video with camera</string>
+    <string name="media_bar_description_gallery">Pick a media from gallery</string>
+    <string name="media_item_content_description">Media</string>
+    <string name="media_popup_gallery">Gallery</string>
+    <string name="media_popup_gallery_chose_photo">Photo from device</string>
+    <string name="media_popup_gallery_chose_video">Video from device</string>
+    <string name="media_popup_take_photo">Take Photo</string>
+    <string name="media_popup_take_video">Take Video</string>
+    <string name="media_upload_dialog_message">Media must be uploaded before editing HTML.</string>
+    <string name="media_upload_dialog_positive">OK</string>
+    <string name="preformat">Preformat</string>
+    <string name="samsung_disabled_custom_clipboard">Sorry, this feature is disabled on Android %1$s. Please use the Paste action instead.</string>
+    <string name="title_select_photo">Select Photo</string>
+    <string name="title_select_video">Select Video</string>
+    <string name="visual_editor">Visual toolbarActionListener</string>
+    <style name="AztecTextStyle">
+        <item name="android:textCursorDrawable">?attr/textColor</item>
+        <item name="backgroundColor">@android:color/transparent</item>
+        <item name="bulletColor">@color/blue_medium</item>
+        <item name="bulletMargin">@dimen/bullet_margin</item>
+        <item name="bulletPadding">@dimen/bullet_padding</item>
+        <item name="bulletWidth">@dimen/bullet_width</item>
+        <item name="codeBackground">@color/code_background</item>
+        <item name="codeBackgroundAlpha">75%</item>
+        <item name="codeColor">@color/code</item>
+        <item name="lineSpacingExtra">@dimen/spacing_extra</item>
+        <item name="lineSpacingMultiplier">@dimen/spacing_multiplier</item>
+        <item name="linkColor">@color/blue_wordpress</item>
+        <item name="linkUnderline">false</item>
+        <item name="preformatBackground">@color/code_background</item>
+        <item name="preformatBackgroundAlpha">75%</item>
+        <item name="preformatColor">@color/white</item>
+        <item name="quoteBackground">@color/blue_wordpress</item>
+        <item name="quoteBackgroundAlpha">75%</item>
+        <item name="quoteColor">@color/blue_medium</item>
+        <item name="quoteMargin">@dimen/quote_margin</item>
+        <item name="quotePadding">@dimen/quote_padding</item>
+        <item name="quoteWidth">@dimen/quote_width</item>
+        <item name="textColor">@android:color/white</item>
+        <item name="textColorHint">@android:color/darker_gray</item>
+    </style>
+    <style name="AztecToolbarStyle">
+        <item name="advanced">false</item>
+        <item name="toolbarIconNormalColor">@color/grey_darken_20</item>
+        <item name="toolbarIconHighlightColor">@color/almost_black</item>
+        <item name="toolbarIconDisabledColor">@color/grey_lighten_20</item>
+    </style>
+    <style name="DividerHorizontal">
+        <item name="android:background">@color/format_bar_divider_horizontal</item>
+    </style>
+    <style name="DividerSourceView">
+        <item name="android:background">@color/sourceview_separator</item>
+    </style>
+    <style name="DividerVertical">
+        <item name="android:background">@color/format_bar_divider_vertical</item>
+    </style>
+    <style name="FormatBarButton">
+        <item name="android:minWidth">@dimen/aztec_format_bar_height</item>
+        <item name="android:minHeight">@dimen/aztec_format_bar_height</item>
+        <item name="android:textOn">@null</item>
+        <item name="android:textOff">@null</item>
+    </style>
+    <style name="Shortcut.Header" parent="TextAppearance.AppCompat">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/margin_dialog</item>
+        <item name="android:layout_marginRight">@dimen/margin_dialog</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/blue_wordpress</item>
+        <item name="android:textSize">@dimen/text_header</item>
+    </style>
+    <style name="Shortcut.Item" parent="TextAppearance.AppCompat">
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_item</item>
+        <item name="android:layout_alignParentLeft">true</item>
+    </style>
+    <style name="Shortcut.Key.Multiple" parent="TextAppearance.AppCompat">
+        <item name="android:background">@drawable/bg_key</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginLeft">@dimen/margin_key</item>
+        <item name="android:minWidth">@dimen/width_key</item>
+        <item name="android:paddingLeft">@dimen/padding_key</item>
+        <item name="android:paddingRight">@dimen/padding_key</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/text_key</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+    <style name="Shortcut.Key.Single" parent="TextAppearance.AppCompat">
+        <item name="android:background">@drawable/bg_key</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginLeft">@dimen/margin_key</item>
+        <item name="android:minWidth">@dimen/width_key</item>
+        <item name="android:paddingLeft">@dimen/padding_key</item>
+        <item name="android:paddingRight">@dimen/padding_key</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/text_key</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+    <style name="ToolbarLayoutDirection">
+        <item name="android:layoutDirection" ns1:targetApi="jelly_bean_mr1">ltr</item>
+    </style>
+    <declare-styleable name="AztecText">
+        <attr format="reference|color" name="backgroundColor"/>
+        <attr format="reference|dimension" name="blockVerticalPadding"/>
+        <attr format="reference|dimension" name="headingVerticalPadding"/>
+        <attr format="reference|color" name="bulletColor"/>
+        <attr format="reference|dimension" name="bulletMargin"/>
+        <attr format="reference|dimension" name="bulletPadding"/>
+        <attr format="reference|dimension" name="bulletWidth"/>
+        <attr format="reference|color" name="codeBackground"/>
+        <attr format="reference|fraction" name="codeBackgroundAlpha"/>
+        <attr format="reference|color" name="codeColor"/>
+        <attr format="reference" name="drawableFailed"/>
+        <attr format="reference" name="drawableLoading"/>
+        <attr format="reference|boolean" name="historyEnable"/>
+        <attr format="reference|boolean" name="commentsVisible"/>
+        <attr format="reference|integer" name="historySize"/>
+        <attr format="reference|dimension" name="lineSpacingExtra"/>
+        <attr format="reference|float" name="lineSpacingMultiplier"/>
+        <attr format="reference|color" name="linkColor"/>
+        <attr format="reference|boolean" name="linkUnderline"/>
+        <attr format="reference|color" name="preformatBackground"/>
+        <attr format="reference|fraction" name="preformatBackgroundAlpha"/>
+        <attr format="reference|color" name="preformatColor"/>
+        <attr format="reference|color" name="quoteBackground"/>
+        <attr format="reference|fraction" name="quoteBackgroundAlpha"/>
+        <attr format="reference|color" name="quoteColor"/>
+        <attr format="reference|dimension" name="quoteMargin"/>
+        <attr format="reference|dimension" name="quotePadding"/>
+        <attr format="reference|dimension" name="quoteWidth"/>
+        <attr format="reference|color" name="textColor"/>
+        <attr format="reference|color" name="textColorHint"/>
+    </declare-styleable>
+    <declare-styleable name="AztecToolbar">
+        <attr format="reference|boolean" name="advanced"/>
+        <attr format="reference|boolean" name="mediaToolbarAvailable"/>
+        <attr format="reference|color" name="toolbarBackgroundColor"/>
+        <attr format="reference|color" name="toolbarBorderColor"/>
+        <attr format="reference|color" name="toolbarIconNormalColor"/>
+        <attr format="reference|color" name="toolbarIconHighlightColor"/>
+        <attr format="reference|color" name="toolbarIconDisabledColor"/>
+    </declare-styleable>
+    <declare-styleable name="SourceViewEditText">
+        <attr format="reference|color" name="attributeColor"/>
+        <attr format="reference|color" name="codeBackgroundColor"/>
+        <attr format="reference|boolean" name="codeDialog"/>
+        <attr format="reference|color" name="codeTextColor"/>
+        <attr format="reference|color" name="tagColor"/>
+    </declare-styleable>
+</resources>
