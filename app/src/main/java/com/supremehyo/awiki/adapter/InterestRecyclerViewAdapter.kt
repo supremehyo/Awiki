@@ -19,18 +19,22 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.supremehyo.awiki.DTO.HometoEditDTO
 import com.supremehyo.awiki.R
+import com.supremehyo.awiki.databinding.WikiInterestitemRecyclerviewBinding
 import com.supremehyo.awiki.databinding.WikiItemLoadingBinding
 import com.supremehyo.awiki.databinding.WikiItemRecyclerviewBinding
+import com.supremehyo.awiki.repository.interest.InterestWikiContract
 import com.supremehyo.awiki.repository.wiki.WikiContract
 import com.supremehyo.awiki.utils.EventBus
 import com.supremehyo.awiki.viewmodel.EditFragmentViewModel
+import kotlinx.android.synthetic.main.wiki_interestitem_recyclerview.view.*
 import kotlinx.android.synthetic.main.wiki_item_recyclerview.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class HomeRecyclerViewAdapter(activity : Activity ,items: List<WikiContract?>? , viewmodel : EditFragmentViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class InterestRecyclerViewAdapter(activity : Activity, items: List<InterestWikiContract?>?, viewmodel : EditFragmentViewModel) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val TYPE_ITEM = 0
@@ -59,14 +63,14 @@ class HomeRecyclerViewAdapter(activity : Activity ,items: List<WikiContract?>? ,
         }
     }
 
-    fun updateItem(list:ArrayList<WikiContract?>?){
+    fun updateItem(list:ArrayList<InterestWikiContract?>?){
         this.filteredList = list
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         context = parent.context
         if (viewType == TYPE_ITEM){
-            val binding = WikiItemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            val binding = WikiInterestitemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             return ItemViewHolder(binding)
         }else{
             val binding = WikiItemLoadingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -83,17 +87,18 @@ class HomeRecyclerViewAdapter(activity : Activity ,items: List<WikiContract?>? ,
             
             
             holder.itemView.wiki_item_cl.setOnClickListener {
-                var temp = HometoEditDTO(item, "read")
-                model.clickHomeWikiListItem(temp)
+              //  var temp = HometoEditDTO(item, "read")
+              //  model.clickHomeWikiListItem(temp)
+
                 findNavController(holder.itemView).navigate(R.id.action_homeFragment_to_writeFragment)
             }
             
             //리스트 확장버튼 클릭시
             holder.itemView.expand_list_item.setOnClickListener {
-                expandOpen(holder.itemView.expand_ll , holder.itemView.expand_list_item)
+                expandOpen(holder.itemView.interest_expand_ll , holder.itemView.interest_expand_list_item)
             }
             holder.itemView.expand_list_item_close.setOnClickListener {
-                expandClose(holder.itemView.expand_ll , holder.itemView.expand_list_item)
+                expandClose(holder.itemView.interest_expand_ll , holder.itemView.interest_expand_list_item)
             }
 
         }else if (holder is LoadingViewHolder){
@@ -103,10 +108,10 @@ class HomeRecyclerViewAdapter(activity : Activity ,items: List<WikiContract?>? ,
     // 아이템뷰에 프로그레스바가 들어가는 경우
     inner class LoadingViewHolder(var binding: WikiItemLoadingBinding) : RecyclerView.ViewHolder(binding.root) {}
 
-    inner class ItemViewHolder(var binding: WikiItemRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: WikiContract){
-            binding.wikiTitle.text = item.title
-            binding.rawContent.text = item.rawContent
+    inner class ItemViewHolder(var binding: WikiInterestitemRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: InterestWikiContract){
+          //  binding.wikiTitle.text = item.title
+         //   binding.rawContent.text = item.rawContent
         }
     }
     

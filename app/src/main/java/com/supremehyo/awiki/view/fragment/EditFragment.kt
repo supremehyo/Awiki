@@ -40,6 +40,7 @@ import com.supremehyo.awiki.MainActionListener
 import com.supremehyo.awiki.MainActivity
 import com.supremehyo.awiki.R
 import com.supremehyo.awiki.databinding.FragmentEditBinding
+import com.supremehyo.awiki.repository.interest.InterestWikiContract
 import com.supremehyo.awiki.repository.wiki.WikiContract
 import com.supremehyo.awiki.utils.EventBus
 import com.supremehyo.awiki.utils.MediaToolbarCameraButton
@@ -128,8 +129,9 @@ class EditFragment : Fragment() ,
     lateinit var like_bt : LinearLayout
     lateinit var pdf_iv : ImageView
     lateinit var  edit_scroll :ScrollView
-
     var likeFlag : Boolean = false
+
+    lateinit var tempDTO : InterestWikiContract
 
     private val isRunningTest: Boolean by lazy {
         try {
@@ -158,6 +160,32 @@ class EditFragment : Fragment() ,
 
         viewModel.editStateLiveData.observe(this, androidx.lifecycle.Observer {
             readOrwirteTypeCheck(it)
+        })
+
+        viewModel.insertInterestLiveData.observe(this , androidx.lifecycle.Observer {
+            if(it != 0L) {
+                likeFlag = true
+                like_iv.setImageResource(R.drawable.ic_baseline_favorite_24)
+                Toast.makeText(context, "관심 목록에 추가됐습니다.", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        viewModel.deleteInterestLiveData.observe(this , androidx.lifecycle.Observer {
+            if(it == "삭제"){
+                likeFlag = false
+                like_iv.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+                Toast.makeText(context, "관심 목록에서 해제됐습니다.", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        viewModel.getInterestLiveData.observe(this , androidx.lifecycle.Observer {
+            if(it!=null){
+                likeFlag = true
+                like_iv.setImageResource(R.drawable.ic_baseline_favorite_24)
+            }else{
+                likeFlag = false
+                like_iv.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+            }
         })
     }
 
@@ -223,16 +251,11 @@ class EditFragment : Fragment() ,
         //좋아요 누르기
         like_bt.setOnClickListener {
             if(!likeFlag){
-                likeFlag = true
-                like_iv.setImageResource(R.drawable.ic_baseline_favorite_24)
-                Toast.makeText(context, "관심 목록에 추가됐습니다.", Toast.LENGTH_SHORT).show()
+                viewModel.insertInterestWiki(tempDTO) //wiki 를 클릭해서 상세 페이지로 넘어왔을때 interest 로 넘길 수 있는 객체로 생성해준 변수 tempDTO
             }else{
-                likeFlag = false
-                like_iv.setImageResource(R.drawable.ic_baseline_favorite_border_24)
-                Toast.makeText(context, "관심 목록에서 해제됐습니다.", Toast.LENGTH_SHORT).show()
+                viewModel.deleteInterestWiki(tempDTO.id!!)
             }
         }
-
 
         //TODO 처음 발행일때랑 수정하는거랑 구분하는게 필요함. 처음 발행일때는 insert 수정할때는 update 해야해서
         view.edit_emit.setOnClickListener {
@@ -279,11 +302,15 @@ class EditFragment : Fragment() ,
 
         viewModel.clickWikiItem.observe(this , androidx.lifecycle.Observer {
             if(it != null){
+                var temp = it.wikiDTO!!
+                tempDTO = InterestWikiContract(temp.id , temp.date ,temp.title ,temp.category,temp.content, temp.images,temp.rawContent)
+
                 initHtmltoString(it.wikiDTO?.content.toString())
                 edit_title.setText(it.wikiDTO?.title.toString())
                 edit_category.setText(it.wikiDTO?.category.toString())
                 viewModel.setState(it.readOrWrite)
-                //readOrwirteTypeCheck()
+
+                viewModel.getInterestWiki(temp.title) // 지금 읽어온 wiki가 내 관심 목록에 있는가? 알아오는 함수
             }
         })
 

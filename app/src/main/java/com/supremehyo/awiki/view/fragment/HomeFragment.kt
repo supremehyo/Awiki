@@ -51,15 +51,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
         //viewModel.getWiki("title1" , requireContext() , "local")
         initAdapter()
         initScrollListener()
-        var wikiContract = WikiContract(1L,"데이트","타이틀임","카테고리임","컨텐츠임","이미징ㅇ","로우")
-        viewmodel2.posttest(wikiContract)
+        var wikiContract = WikiContract(1L,"데이트","타이틀임","카테고리임","컨텐츠임","이미징","로우")
+       // viewmodel2.posttest(wikiContract)
     }
     override fun initDataBinding() {
 
         viewmodel2.LiveData.observe(this , Observer {
 
         })
-
 
         //나중에 여기 랜덤으로 뽑아와서 5개 리스트로 나열하면 될듯
         viewModel.wikiDTOLiveData.observe(this , Observer {

@@ -2,6 +2,8 @@ package com.supremehyo.awiki.model
 
 import android.content.Context
 import android.util.Log
+import com.supremehyo.awiki.repository.interest.InterestWikiContract
+import com.supremehyo.awiki.repository.interest.InterestWikiDatabase
 import com.supremehyo.awiki.repository.wiki.WikiContract
 import com.supremehyo.awiki.repository.wiki.WikiDatabase
 import com.supremehyo.awiki.retrofit.RetroServiceInstance
@@ -20,7 +22,6 @@ import javax.inject.Singleton
 @Singleton // 싱글톤으로 어디서 여러번 호출해도 같은 객체로 인식하도록 집어넣어진다.
 class WikiModelImple @Inject constructor ( //Inject는 힐트가 생성자를 알아볼 수 있도록 명시
     @ApplicationContext private val context : Context , val retroServiceInstance: RetroServiceInstance) : WikiModel{ // context를 hilt 인자로 넘길때 ApplicationContext 가 필요
-
 
     override suspend fun insertWiki(dto: WikiContract , localOrApi : String) : Long {
         var aaaa = 0L
@@ -70,6 +71,9 @@ class WikiModelImple @Inject constructor ( //Inject는 힐트가 생성자를 �
         }
     }
 
+
+
+
     override suspend fun randomGetOneWiki(long: Long): WikiContract {
         val wikidao = WikiDatabase.getInstance(context)!!.contactsDao()
         return wikidao.randomGetOneWiki(long)
@@ -86,13 +90,36 @@ class WikiModelImple @Inject constructor ( //Inject는 힐트가 생성자를 �
 
     override suspend fun posttest(wikiContract: WikiContract) {
 
-        retroServiceInstance.postData(wikiContract).enqueue(object : Callback<WikiContract>{
-            override fun onResponse(call: Call<WikiContract>, response: Response<WikiContract>) {
-                Log.v("sfdasf" , response.body()!!.title)
+        retroServiceInstance.postData(wikiContract).enqueue(object : Callback<ResponseBody>{
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                Log.v("sfdasf" , response.body()!!.string())
             }
-            override fun onFailure(call: Call<WikiContract>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.v("sfdasf2" , t.message.toString())
             }
         })
+    }
+
+
+    //관심 문서 관련 함수들
+    override suspend fun insertInterestWiki(dto: InterestWikiContract): Long {
+        return InterestWikiDatabase.getInstance(context)!!.contactsDao().insertWiki(dto)
+    }
+
+    override suspend fun getInterestWiki(title: String): InterestWikiContract {
+        return InterestWikiDatabase.getInstance(context)!!.contactsDao().getOneWiki(title)
+    }
+
+    override suspend fun getListInterestWiki(title: String): List<InterestWikiContract> {
+        return InterestWikiDatabase.getInstance(context)!!.contactsDao().getListWikiBySearch(title)
+    }
+
+    override suspend fun deleteInterestWiki(id: Long) {
+        InterestWikiDatabase.getInstance(context)!!.contactsDao().deleteWiki(id)
+
+    }
+
+    override suspend fun getListInterestDefaultWiki(): List<InterestWikiContract> {
+        return InterestWikiDatabase.getInstance(context)!!.contactsDao().getListWikiDefault()
     }
 }

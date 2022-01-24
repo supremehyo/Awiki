@@ -35,6 +35,7 @@
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/app/src/main/res/layout/motion_12_drawerlayout_content.xml" value="0.14583333333333334" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/app/src/main/res/layout/motion_13_drawerlayout.xml" value="0.14583333333333334" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/app/src/main/res/layout/motion_13_drawerlayout_menu.xml" value="0.1" />
+        <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/app/src/main/res/layout/wiki_interestitem_recyclerview.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/app/src/main/res/layout/wiki_item_loading.xml" value="0.25" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/app/src/main/res/layout/wiki_item_recyclerview.xml" value="0.33" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/app/src/main/res/menu/menu_actions.xml" value="0.2296875" />
@@ -96,8 +97,7 @@
       </map>
     </option>
   </component>
-  <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

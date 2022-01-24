@@ -1,25 +1,25 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\androidProject\Awiki\aztec\src\main\AndroidManifest.xml:3:1-42
-INJECTED from D:\androidProject\Awiki\aztec\src\main\AndroidManifest.xml:3:1-42
-INJECTED from D:\androidProject\Awiki\aztec\src\main\AndroidManifest.xml:3:1-42
+ADDED from C:\Users\Kade\AndroidStudioProjects\Awiki\aztec\src\main\AndroidManifest.xml:3:1-42
+INJECTED from C:\Users\Kade\AndroidStudioProjects\Awiki\aztec\src\main\AndroidManifest.xml:3:1-42
+INJECTED from C:\Users\Kade\AndroidStudioProjects\Awiki\aztec\src\main\AndroidManifest.xml:3:1-42
 	package
-		ADDED from D:\androidProject\Awiki\aztec\src\main\AndroidManifest.xml:3:11-40
-		INJECTED from D:\androidProject\Awiki\aztec\src\main\AndroidManifest.xml
-		INJECTED from D:\androidProject\Awiki\aztec\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Kade\AndroidStudioProjects\Awiki\aztec\src\main\AndroidManifest.xml:3:11-40
+		INJECTED from C:\Users\Kade\AndroidStudioProjects\Awiki\aztec\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Kade\AndroidStudioProjects\Awiki\aztec\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from D:\androidProject\Awiki\aztec\src\main\AndroidManifest.xml:3:1-42
+		ADDED from C:\Users\Kade\AndroidStudioProjects\Awiki\aztec\src\main\AndroidManifest.xml:3:1-42
 uses-sdk
-INJECTED from D:\androidProject\Awiki\aztec\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from D:\androidProject\Awiki\aztec\src\main\AndroidManifest.xml
-INJECTED from D:\androidProject\Awiki\aztec\src\main\AndroidManifest.xml
-INJECTED from D:\androidProject\Awiki\aztec\src\main\AndroidManifest.xml
-INJECTED from D:\androidProject\Awiki\aztec\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Kade\AndroidStudioProjects\Awiki\aztec\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Kade\AndroidStudioProjects\Awiki\aztec\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Kade\AndroidStudioProjects\Awiki\aztec\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Kade\AndroidStudioProjects\Awiki\aztec\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Kade\AndroidStudioProjects\Awiki\aztec\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from D:\androidProject\Awiki\aztec\src\main\AndroidManifest.xml
-		ADDED from D:\androidProject\Awiki\aztec\src\main\AndroidManifest.xml
-		INJECTED from D:\androidProject\Awiki\aztec\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Kade\AndroidStudioProjects\Awiki\aztec\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Kade\AndroidStudioProjects\Awiki\aztec\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Kade\AndroidStudioProjects\Awiki\aztec\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from D:\androidProject\Awiki\aztec\src\main\AndroidManifest.xml
-		ADDED from D:\androidProject\Awiki\aztec\src\main\AndroidManifest.xml
-		INJECTED from D:\androidProject\Awiki\aztec\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Kade\AndroidStudioProjects\Awiki\aztec\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Kade\AndroidStudioProjects\Awiki\aztec\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Kade\AndroidStudioProjects\Awiki\aztec\src\main\AndroidManifest.xml

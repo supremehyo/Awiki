@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.supremehyo.awiki.DTO.HometoEditDTO
 import com.supremehyo.awiki.base.BaseViewModel
 import com.supremehyo.awiki.model.WikiModelImple
+import com.supremehyo.awiki.repository.interest.InterestWikiContract
 import com.supremehyo.awiki.repository.wiki.WikiContract
 import com.supremehyo.awiki.utils.EventBus
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -45,6 +46,25 @@ class EditFragmentViewModel @Inject constructor(private val model : WikiModelImp
     private val _editStateLiveData = MutableLiveData<String>()
     val editStateLiveData: LiveData<String>
         get() = _editStateLiveData
+
+
+    //관심 목록 관련 변수
+    private val _insertInterestLiveData = MutableLiveData<Long>()
+    val insertInterestLiveData: LiveData<Long>
+        get() = _insertInterestLiveData
+
+    private val _getInterestLiveData = MutableLiveData<InterestWikiContract>()
+    val getInterestLiveData: LiveData<InterestWikiContract>
+        get() = _getInterestLiveData
+
+    private val _getListInterestLiveData = MutableLiveData<List<InterestWikiContract>>()
+    val getListInterestLiveData: LiveData<List<InterestWikiContract>>
+        get() = _getListInterestLiveData
+
+    private val _deleteInterestLiveData = MutableLiveData<String>()
+    val deleteInterestLiveData: LiveData<String>
+        get() = _deleteInterestLiveData
+
 
     //wiki 저장하기
     fun insertWiki(dto : WikiContract , localOrApi : String ){
@@ -98,6 +118,11 @@ class EditFragmentViewModel @Inject constructor(private val model : WikiModelImp
     fun gonull(){
         _wikiDTOListLiveData.postValue(null)
     }
+
+    fun gonull2(){
+        _getListInterestLiveData.postValue(null)
+    }
+
     fun clickHomeWikiListItemnull(){
         _clickWikiItem.postValue(null)
     }
@@ -105,6 +130,49 @@ class EditFragmentViewModel @Inject constructor(private val model : WikiModelImp
     fun clickHomeWikiListItem(dto : HometoEditDTO){
         viewModelScope.launch { // 코루틴 적용
             _clickWikiItem.postValue(dto)
+        }
+    }
+
+
+    //관심 문서 관련함수
+    fun insertInterestWiki(dto : InterestWikiContract){
+        viewModelScope.launch { // 코루틴 적용
+            var interestWiki = model.insertInterestWiki(dto)
+            _insertInterestLiveData.postValue(interestWiki)
+        }
+    }
+    //관심 문서 관련함수
+    fun getInterestWiki(title: String){
+        viewModelScope.launch { // 코루틴 적용
+            var getInterestWiki = model.getInterestWiki(title)
+            _getInterestLiveData.postValue(getInterestWiki)
+
+        }
+    }
+    //관심 문서 관련함수
+    fun getListInterestWiki(title : String){
+        viewModelScope.launch { // 코루틴 적용
+            var getInterestWikiList = model.getListInterestWiki(title)
+            _getListInterestLiveData.postValue(getInterestWikiList)
+        }
+    }
+
+    //관심 문서 관련함수
+    fun getListInterestWikiDefault(){
+        viewModelScope.launch { // 코루틴 적용
+            var getInterestWikiList = model.getListInterestDefaultWiki()
+            _getListInterestLiveData.postValue(getInterestWikiList)
+        }
+    }
+
+
+    //관심 문서 관련함수
+    fun deleteInterestWiki(id : Long){
+        viewModelScope.launch { // 코루틴 적용
+            var deleteWiki = model.deleteInterestWiki(id)
+            if(deleteWiki!= null){
+                _deleteInterestLiveData.postValue("삭제")
+            }
         }
     }
 
