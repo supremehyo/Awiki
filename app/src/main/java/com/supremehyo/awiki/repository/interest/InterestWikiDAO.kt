@@ -1,8 +1,10 @@
 package com.supremehyo.awiki.repository.interest
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 
+@Dao
 interface InterestWikiDAO {
 
     @Query("SELECT * FROM tb_intersetWiki where title =:title")

@@ -309,7 +309,7 @@ class EditFragment : Fragment() ,
                 edit_title.setText(it.wikiDTO?.title.toString())
                 edit_category.setText(it.wikiDTO?.category.toString())
                 viewModel.setState(it.readOrWrite)
-
+                Log.v("sssdfsdfsdfs" , temp.title)
                 viewModel.getInterestWiki(temp.title) // 지금 읽어온 wiki가 내 관심 목록에 있는가? 알아오는 함수
             }
         })

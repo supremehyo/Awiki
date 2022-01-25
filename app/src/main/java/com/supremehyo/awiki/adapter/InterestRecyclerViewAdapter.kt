@@ -86,18 +86,17 @@ class InterestRecyclerViewAdapter(activity : Activity, items: List<InterestWikiC
             itemHolder.bind(item!!)
             
             
-            holder.itemView.wiki_item_cl.setOnClickListener {
+            holder.itemView.interest_wiki_item_cl.setOnClickListener {
               //  var temp = HometoEditDTO(item, "read")
               //  model.clickHomeWikiListItem(temp)
-
                 findNavController(holder.itemView).navigate(R.id.action_homeFragment_to_writeFragment)
             }
             
             //리스트 확장버튼 클릭시
-            holder.itemView.expand_list_item.setOnClickListener {
+            holder.itemView.interest_expand_list_item.setOnClickListener {
                 expandOpen(holder.itemView.interest_expand_ll , holder.itemView.interest_expand_list_item)
             }
-            holder.itemView.expand_list_item_close.setOnClickListener {
+            holder.itemView.interest_expand_list_item.setOnClickListener {
                 expandClose(holder.itemView.interest_expand_ll , holder.itemView.interest_expand_list_item)
             }
 
@@ -110,8 +109,8 @@ class InterestRecyclerViewAdapter(activity : Activity, items: List<InterestWikiC
 
     inner class ItemViewHolder(var binding: WikiInterestitemRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: InterestWikiContract){
-          //  binding.wikiTitle.text = item.title
-         //   binding.rawContent.text = item.rawContent
+            binding.interestWikiTitle.text = item.title
+            binding.interestRawContent.text = item.rawContent
         }
     }
     
