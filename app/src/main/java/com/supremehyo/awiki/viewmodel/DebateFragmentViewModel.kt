@@ -7,9 +7,6 @@ import com.supremehyo.awiki.DTO.DebateDTO
 import com.supremehyo.awiki.DTO.DebateListDTO
 import com.supremehyo.awiki.base.BaseViewModel
 import com.supremehyo.awiki.model.DebateModelIple
-import com.supremehyo.awiki.model.WikiModelImple
-import com.supremehyo.awiki.repository.interest.InterestWikiContract
-import com.supremehyo.awiki.repository.wiki.WikiContract
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -603,6 +603,10 @@ class AztecToolbar : FrameLayout, IAztecToolbar, OnMenuItemClickListener {
                 aztecToolbarListener?.onToolbarExpandButtonClicked()
                 animateToolbarExpand()
             }
+            ToolbarAction.JUMP->{
+                //눌리고 있음 확인함 ... 모양 버튼임
+                Toast.makeText(context, "짬푸", Toast.LENGTH_SHORT).show()
+            }
             else -> {
                 Toast.makeText(context, "Unsupported action", Toast.LENGTH_SHORT).show()
             }

@@ -21,6 +21,7 @@
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/app/src/main/res/layout/activity_scrolling.xml" value="0.14583333333333334" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/app/src/main/res/layout/activity_splash.xml" value="0.17604166666666668" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/app/src/main/res/layout/content_scrolling.xml" value="0.33" />
+        <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/app/src/main/res/layout/debate_title_item_recyclerview.xml" value="0.2869791666666667" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/app/src/main/res/layout/fragment_debate.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/app/src/main/res/layout/fragment_edit.xml" value="0.33" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/app/src/main/res/layout/fragment_home.xml" value="0.25" />
@@ -61,6 +62,7 @@
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/aztec/src/main/res/drawable/format_bar_button_bold_highlighted.xml" value="0.29444444444444445" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/aztec/src/main/res/drawable/format_bar_button_bold_selector.xml" value="0.3292307692307692" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/aztec/src/main/res/drawable/format_bar_button_ellipsis_horizontal.xml" value="0.3292307692307692" />
+        <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/aztec/src/main/res/drawable/format_bar_button_ellipsis_horizontal_selector.xml" value="0.3328125" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/aztec/src/main/res/drawable/format_bar_button_ellipsis_vertical_selector.xml" value="0.3292307692307692" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/aztec/src/main/res/drawable/format_bar_button_heading.xml" value="0.3292307692307692" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/aztec/src/main/res/drawable/format_bar_button_heading_1_highlighted.xml" value="0.29444444444444445" />
@@ -83,7 +85,11 @@
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/aztec/src/main/res/drawable/format_bar_button_strikethrough_highlighted.xml" value="0.29444444444444445" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/aztec/src/main/res/drawable/format_bar_button_ul_highlighted.xml" value="0.29444444444444445" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/aztec/src/main/res/drawable/format_bar_button_underline_highlighted.xml" value="0.29444444444444445" />
+        <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/aztec/src/main/res/layout/aztec_format_bar_advanced.xml" value="0.28958333333333336" />
+        <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/aztec/src/main/res/layout/aztec_format_bar_basic.xml" value="0.28958333333333336" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/aztec/src/main/res/layout/dialog_block_editor.xml" value="0.27708333333333335" />
+        <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/aztec/src/main/res/layout/dialog_link.xml" value="0.28958333333333336" />
+        <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/aztec/src/main/res/layout/dialog_shortcuts.xml" value="0.28958333333333336" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/aztec/src/main/res/menu/heading.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/Kade/AndroidStudioProjects/Awiki/aztec/src/main/res/menu/list.xml" value="0.3182291666666667" />
         <entry key="..\:/androidProject/AWiki/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />

@@ -93,11 +93,19 @@ enum class ToolbarAction constructor(
             R.drawable.format_bar_button_ellipsis_vertical_selector,
             ToolbarActionType.OTHER,
             setOf(AztecTextFormat.FORMAT_NONE)),
+    JUMP(
+        R.id.format_bar_button_jump,
+        R.drawable.format_bar_button_ellipsis_horizontal_selector,
+        ToolbarActionType.OTHER,
+        setOf(AztecTextFormat.FORMAT_NONE)),
+
     ELLIPSIS_EXPAND(
             R.id.format_bar_button_ellipsis_expanded,
             R.drawable.format_bar_button_ellipsis_horizontal_selector,
             ToolbarActionType.OTHER,
             setOf(AztecTextFormat.FORMAT_NONE));
+
+
 
     companion object {
         fun getToolbarActionForStyle(style: ITextFormat): IToolbarAction? {

@@ -16,4 +16,6 @@ interface MainActionListener {
     fun onApplyUnorderedListSpan()
 
     fun onShowTextPreview()
+
+    fun onJumpText(title : String)
 }

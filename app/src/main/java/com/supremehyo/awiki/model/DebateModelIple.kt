@@ -9,9 +9,10 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.ResponseBody
 import retrofit2.Call
 import javax.inject.Inject
+import javax.inject.Singleton
 
 
-@HiltViewModel
+@Singleton
 class DebateModelIple @Inject constructor (@ApplicationContext private val context : Context, private val retroServiceInstance: RetroServiceInstance) : DebateModel{
 
     override suspend fun createDebate(wikiId: Long, debateTitle: String): Call<Long> {

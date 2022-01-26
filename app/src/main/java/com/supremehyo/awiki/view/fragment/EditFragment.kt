@@ -80,6 +80,8 @@ import org.wordpress.aztec.util.AztecLog
 import org.xml.sax.Attributes
 import java.io.File
 import java.util.*
+import kotlin.collections.ArrayList
+
 //https://github.com/wordpress-mobile/AztecEditor-Android  라이브러리참고
 @AndroidEntryPoint
 class EditFragment : Fragment() ,
@@ -129,6 +131,7 @@ class EditFragment : Fragment() ,
     lateinit var like_bt : LinearLayout
     lateinit var pdf_iv : ImageView
     lateinit var  edit_scroll :ScrollView
+    var  jumpWiki : ArrayList<String> = ArrayList<String>()
     var likeFlag : Boolean = false
 
     lateinit var tempDTO : InterestWikiContract
@@ -147,6 +150,7 @@ class EditFragment : Fragment() ,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
 
         //글이 작성되었을때 리턴값을 받아와서 그때 toast 를 보내는 함수
@@ -245,6 +249,7 @@ class EditFragment : Fragment() ,
         pdf_iv.setOnClickListener {
             pdfUtil = PdfUtil(requireContext())
             pdfUtil.layoutToImage(edit_scroll) // pdf 다운로드
+            Toast.makeText(context, "PDF 파일로 저장했습니다.", Toast.LENGTH_SHORT).show()
         }
 
 
@@ -257,7 +262,6 @@ class EditFragment : Fragment() ,
             }
         }
 
-        //TODO 처음 발행일때랑 수정하는거랑 구분하는게 필요함. 처음 발행일때는 insert 수정할때는 update 해야해서
         view.edit_emit.setOnClickListener {
             ////html으로 바로 변경
             val editorHtml = visualEditor!!.toPlainHtml(true)
@@ -269,9 +273,9 @@ class EditFragment : Fragment() ,
                 sourceEditor!!.displayStyledAndFormattedHtml(editorHtml)
             }
             editorContentParsedSHA256LastSwitch = sha256
-            Log.v("sfdsdf" , visualEditor.text.toString())
-
             ////html으로 바로 변경
+
+
             saveWiki(edit_title.text.toString() , edit_category.text.toString() ,
                 "" , sourceEditor.text.toString() , "" , visualEditor.text.toString())
         }
@@ -309,7 +313,6 @@ class EditFragment : Fragment() ,
                 edit_title.setText(it.wikiDTO?.title.toString())
                 edit_category.setText(it.wikiDTO?.category.toString())
                 viewModel.setState(it.readOrWrite)
-                Log.v("sssdfsdfsdfs" , temp.title)
                 viewModel.getInterestWiki(temp.title) // 지금 읽어온 wiki가 내 관심 목록에 있는가? 알아오는 함수
             }
         })
@@ -373,9 +376,6 @@ class EditFragment : Fragment() ,
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
-
-
-
     }
 
     fun saveWiki(title : String , category : String , date : String , content : String , image: String , rawContent: String){
@@ -383,6 +383,9 @@ class EditFragment : Fragment() ,
         viewModel.insertWiki(tempDto , "local") // api 통신할거면 여기에 api를 적을것
     }
 
+    fun addJumpWikiList(title : String){
+        jumpWiki.add(title)
+    }
 
     fun readOrwirteTypeCheck(rw : String){
         when(rw){
@@ -920,7 +923,6 @@ class EditFragment : Fragment() ,
 
     override fun onApplyOrderedListSpan() {
         binding.etEditor.toggleFormatting(AztecTextFormat.FORMAT_ORDERED_LIST)
-
         // Update HTML result in live preview
         onShowTextPreview()
     }
@@ -935,6 +937,11 @@ class EditFragment : Fragment() ,
 
     }
 
+    //문서참조 링크 거는 함수
+    override fun onJumpText(title : String) {
+
+    }
+
     override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
         mode?.menuInflater?.inflate(R.menu.menu_actions, menu)
         return true
@@ -946,7 +953,6 @@ class EditFragment : Fragment() ,
             menu.removeItem(it.itemId)
             menu.add(it.groupId, it.itemId, it.order, it.title)
         }
-
         return false
     }
 
@@ -956,10 +962,15 @@ class EditFragment : Fragment() ,
                 onApplyBoldStyleSpan()
                 true
             }
-            R.id.action_format_italic -> {
+            R.id.action_format_italic ->{
                 onApplyItalicStyleSpan()
                 true
             }
+            /*
+            R.id.action_jump ->{
+                onJumpText(et_editor.text.toString().substring(et_editor.selectionStart, et_editor.selectionEnd))
+                true
+            }*/
             else -> false
         }
     }

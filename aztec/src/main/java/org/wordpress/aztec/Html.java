@@ -358,7 +358,10 @@ class HtmlToSpannedConverter implements org.xml.sax.ContentHandler, LexicalHandl
             start(spannableStringBuilder, AztecTextFormat.FORMAT_CODE, attributes);
         } else if (tag.equalsIgnoreCase("mark")) {
             start(spannableStringBuilder, AztecTextFormat.FORMAT_MARK, attributes);
-        } else if (!UnknownHtmlSpan.Companion.getKNOWN_TAGS().contains(tag.toLowerCase())) {
+        } else if(tag.equalsIgnoreCase("jump")){
+            start(spannableStringBuilder, AztecTextFormat.JUMP, attributes);
+        }
+        else if (!UnknownHtmlSpan.Companion.getKNOWN_TAGS().contains(tag.toLowerCase())) {
             // Initialize a new "Unknown" node
             if (contentHandlerLevel == 0) {
                 startHandlingContent(tag, attributes);
@@ -453,6 +456,8 @@ class HtmlToSpannedConverter implements org.xml.sax.ContentHandler, LexicalHandl
             end(spannableStringBuilder, AztecTextFormat.FORMAT_CODE);
         } else if (tag.equalsIgnoreCase("mark")) {
             end(spannableStringBuilder, AztecTextFormat.FORMAT_MARK);
+        }else if(tag.equalsIgnoreCase("jump")){
+            end(spannableStringBuilder, AztecTextFormat.JUMP);
         }
     }
 

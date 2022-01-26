@@ -16,6 +16,15 @@
             android:orderInCategory="1"
             android:title="기울이기"
             app:showAsAction="ifRoom|withText" />
+
+        <!--
+        <item
+            android:id="@+id/action_jump"
+            android:icon="@drawable/ic_format_italic_black_24dp"
+            android:orderInCategory="1"
+            android:title="문서참조"
+            app:showAsAction="ifRoom|withText" />
+            -->
     </group>
 
 </menu>

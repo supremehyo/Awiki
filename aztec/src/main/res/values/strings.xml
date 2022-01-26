@@ -49,9 +49,9 @@
 
     <!-- LINK -->
     <string name="link_enter_url">URL</string>
-    <string name="link_enter_url_text">Link text (optional)</string>
+    <string name="link_enter_url_text">Link text</string>
     <string name="create_a_link">Create a link</string>
-    <string name="link_open_new_window">Open link in a new window/tab</string>
+    <string name="link_open_new_window">새로운 화면에서 link를 여시겠습니까?</string>
 
     <!-- MEDIA -->
     <string name="error_chooser_photo">No app was found to choose a photo</string>

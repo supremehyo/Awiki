@@ -1749,6 +1749,7 @@ id format_bar_button_heading
 id format_bar_button_horizontal_rule
 id format_bar_button_html
 id format_bar_button_italic
+id format_bar_button_jump
 id format_bar_button_layout_collapsed
 id format_bar_button_layout_expanded
 id format_bar_button_link

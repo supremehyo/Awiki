@@ -1748,6 +1748,7 @@ int id format_bar_button_heading 0x0
 int id format_bar_button_horizontal_rule 0x0
 int id format_bar_button_html 0x0
 int id format_bar_button_italic 0x0
+int id format_bar_button_jump 0x0
 int id format_bar_button_layout_collapsed 0x0
 int id format_bar_button_layout_expanded 0x0
 int id format_bar_button_link 0x0

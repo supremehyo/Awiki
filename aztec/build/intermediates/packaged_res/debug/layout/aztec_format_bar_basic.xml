@@ -185,6 +185,14 @@
                             android:contentDescription="@string/format_bar_description_horizontal_rule">
                         </org.wordpress.aztec.toolbar.RippleToggleButton>
 
+                        <org.wordpress.aztec.toolbar.RippleToggleButton
+                            android:id="@+id/format_bar_button_jump"
+                            style="@style/FormatBarButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:contentDescription="@string/format_bar_description_horizontal_rule">
+                        </org.wordpress.aztec.toolbar.RippleToggleButton>
+
                         <LinearLayout
                             android:id="@+id/plugin_buttons"
                             android:layout_width="wrap_content"

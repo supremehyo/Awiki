@@ -27,7 +27,6 @@ import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
 
-//https://www.pinterest.co.kr/pin/14847873762484397/ 디자인 참고
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(){
 
@@ -48,25 +47,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
 
 
     override fun initStartView() {
-        //viewModel.getWiki("title1" , requireContext() , "local")
         initAdapter()
         initScrollListener()
         var wikiContract = WikiContract(1L,"데이트","타이틀임","카테고리임","컨텐츠임","이미징","로우")
        // viewmodel2.posttest(wikiContract)
     }
-    override fun initDataBinding() {
 
+    override fun initDataBinding() {
         viewmodel2.LiveData.observe(this , Observer {
 
         })
-
         //나중에 여기 랜덤으로 뽑아와서 5개 리스트로 나열하면 될듯
         viewModel.wikiDTOLiveData.observe(this , Observer {
             if (it != null) {
                 Log.v("ssssss" , it.title)
             }
         })
-
         viewModel.wikiDTOListLiveData.observe(this, Observer {
             //여기에 페이징해서 리사이클러뷰 무한 스크롤로 구현하고 처음에 리사이클러뷰 만들어질때
             //위에 awiki 이미지 애니메이션으로 사라지고 리사이클러뷰 사이즈가 확장
@@ -167,7 +163,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
         CoroutineScope(Dispatchers.Main).launch {
             delay(2000)
             val runnable2=  Runnable{
-                Log.v("sdfsdf" ,items.size.toString())
                 items.removeAt(items.size - 1)
                 val scrollPosition = items.size
                 mListAdapter.notifyItemRemoved(scrollPosition) // 프로그래스바 삭제

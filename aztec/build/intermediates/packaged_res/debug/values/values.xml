@@ -181,8 +181,8 @@
     <string name="link_dialog_edit_hint">http(s)://</string>
     <string name="link_dialog_title">Insert link</string>
     <string name="link_enter_url">URL</string>
-    <string name="link_enter_url_text">Link text (optional)</string>
-    <string name="link_open_new_window">Open link in a new window/tab</string>
+    <string name="link_enter_url_text">Link text</string>
+    <string name="link_open_new_window">새로운 화면에서 link를 여시겠습니까?</string>
     <string name="media_bar_description_camera">Take Photo or Video with camera</string>
     <string name="media_bar_description_gallery">Pick a media from gallery</string>
     <string name="media_item_content_description">Media</string>
