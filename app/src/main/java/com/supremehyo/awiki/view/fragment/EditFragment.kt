@@ -244,14 +244,12 @@ class EditFragment : Fragment() ,
             readOrwirteTypeCheck("edit")
         }
 
-
         //pdf 버튼 누르기
         pdf_iv.setOnClickListener {
             pdfUtil = PdfUtil(requireContext())
             pdfUtil.layoutToImage(edit_scroll) // pdf 다운로드
             Toast.makeText(context, "PDF 파일로 저장했습니다.", Toast.LENGTH_SHORT).show()
         }
-
 
         //좋아요 누르기
         like_bt.setOnClickListener {

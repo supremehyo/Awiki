@@ -53,7 +53,6 @@ class DebateRecyclerViewAdapter(activity : Activity, items: List<InterestWikiCon
         }else{
             filteredList?.size!!
         }
-
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -76,8 +75,6 @@ class DebateRecyclerViewAdapter(activity : Activity, items: List<InterestWikiCon
             val binding = WikiItemLoadingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             return LoadingViewHolder(binding)
         }
-
-
     }
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ItemViewHolder){

@@ -8,6 +8,17 @@
     android:layout_height="match_parent"
     tools:context=".view.fragment.InterestFragment">
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/interest_title"
+        android:fontFamily="@font/nanumbarungothic"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/interest_textField"
@@ -18,8 +29,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058">
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.03">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/interest_search_et"
@@ -27,7 +38,7 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/nanumbarungothic"
             android:gravity="center"
-            android:hint="검색어를 입력해주세요."
+            android:hint="@string/here_search_title"
             android:textColor="@color/colorAccent" />
     </com.google.android.material.textfield.TextInputLayout>
 

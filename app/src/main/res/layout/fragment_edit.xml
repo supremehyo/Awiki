@@ -130,7 +130,7 @@
                     android:layout_marginTop="12dp"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/nanumbarungothiclight"
-                    android:hint="제목"
+                    android:hint="@string/hint_title"
                     android:paddingHorizontal="20dp"
                     android:paddingVertical="6dp"
                     android:textColor="@color/colorAccent"
@@ -143,7 +143,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/nanumbarungothiclight"
-                    android:hint="카테고리"
+                    android:hint="@string/hint_category"
                     android:paddingHorizontal="20dp"
                     android:paddingVertical="6dp"
                     android:textColor="@color/colorAccent"
@@ -202,66 +202,5 @@
         android:backgroundTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:toolbarIconHighlightColor="@color/white" />
-
-    <!--
-       <com.google.android.material.bottomappbar.BottomAppBar
-           android:layout_width="match_parent"
-           android:layout_height="48dp"
-           android:layout_gravity="bottom"
-           app:backgroundTint="@color/colorAquaHaze"
-           app:contentInsetEnd="8dp"
-           app:contentInsetStart="8dp"
-           app:elevation="2dp">
-
-
-
-           <androidx.constraintlayout.widget.ConstraintLayout
-               android:layout_width="match_parent"
-               android:layout_height="match_parent">
-
-               <com.google.android.material.button.MaterialButton
-                   android:id="@+id/btn_bold"
-                   style="@style/ActionButton"
-                   app:icon="@drawable/ic_format_bold_black_24dp"
-                   app:layout_constraintBottom_toBottomOf="parent"
-                   app:layout_constraintStart_toStartOf="parent"
-                   app:layout_constraintTop_toTopOf="parent" />
-
-               <com.google.android.material.button.MaterialButton
-                   android:id="@+id/btn_italic"
-                   style="@style/ActionButton"
-                   app:icon="@drawable/ic_format_italic_black_24dp"
-                   app:layout_constraintBottom_toBottomOf="parent"
-                   app:layout_constraintStart_toEndOf="@id/btn_bold"
-                   app:layout_constraintTop_toTopOf="parent" />
-
-               <com.google.android.material.button.MaterialButton
-                   android:id="@+id/btn_quote"
-                   style="@style/ActionButton"
-                   app:icon="@drawable/ic_format_quote_black_24dp"
-                   app:layout_constraintBottom_toBottomOf="parent"
-                   app:layout_constraintStart_toEndOf="@id/btn_italic"
-                   app:layout_constraintTop_toTopOf="parent" />
-
-               <com.google.android.material.button.MaterialButton
-                   android:id="@+id/btn_ordered_list"
-                   style="@style/ActionButton"
-                   app:icon="@drawable/ic_format_list_numbered_black_24dp"
-                   app:layout_constraintBottom_toBottomOf="parent"
-                   app:layout_constraintStart_toEndOf="@id/btn_quote"
-                   app:layout_constraintTop_toTopOf="parent" />
-
-               <com.google.android.material.button.MaterialButton
-                   android:id="@+id/btn_unordered_list"
-                   style="@style/ActionButton"
-                   app:icon="@drawable/ic_format_list_bulleted_black_24dp"
-                   app:layout_constraintBottom_toBottomOf="parent"
-                   app:layout_constraintStart_toEndOf="@id/btn_ordered_list"
-                   app:layout_constraintTop_toTopOf="parent" />
-
-           </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </com.google.android.material.bottomappbar.BottomAppBar> -->
 
 </RelativeLayout>

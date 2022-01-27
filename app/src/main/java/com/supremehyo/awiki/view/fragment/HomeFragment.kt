@@ -55,14 +55,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
 
     override fun initDataBinding() {
         viewmodel2.LiveData.observe(this , Observer {
-
         })
+
         //나중에 여기 랜덤으로 뽑아와서 5개 리스트로 나열하면 될듯
         viewModel.wikiDTOLiveData.observe(this , Observer {
             if (it != null) {
                 Log.v("ssssss" , it.title)
             }
         })
+
         viewModel.wikiDTOListLiveData.observe(this, Observer {
             //여기에 페이징해서 리사이클러뷰 무한 스크롤로 구현하고 처음에 리사이클러뷰 만들어질때
             //위에 awiki 이미지 애니메이션으로 사라지고 리사이클러뷰 사이즈가 확장

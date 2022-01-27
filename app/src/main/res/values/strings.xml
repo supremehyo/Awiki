@@ -8,4 +8,8 @@
     <string name="action_format_italic">Italic</string>
     <string name="action_jump">문서참조</string>
     <string name="hint_input_text">여기에 위키를 편집하세요.</string>
+    <string name= "interest_title">좋아요 누른 문서</string>
+    <string name= "here_search_title">검색어를 입력하세요.</string>
+    <string name="hint_category">카테고리</string>
+    <string name="hint_title">제목</string>
 </resources>
